@@ -21,661 +21,656 @@
                 <input type="radio" name="tabs-depth1" id="model-tab" >
                 <label class="tab" for="model-tab">Model</label>
             </div>
-            <div>
-                <input type="radio" name="tabs-depth1" id="library-tab" >
-                <label class="tab" for="library-tab">Library</label>
-            </div>
         </div> 
     </nav>
     <!-- <main> 은 1st_tab 별 컨텐츠, section 은 컨텐츠 안의 블록, 그룹단위content/title/items -->
-        <main id="tab01-content"> 
-            <section class="preview">
-                <div>
-                    <div class="title">
-                        <span class="spin"><img src="img/ico_spin.svg"></span>
-                        <span class="title_text">Preview</span>
-                    </div>
-                    <div>
-                        <img src="img/PSC_preview.png" alt="">
-                    </div>                
-                </div>
-            </section>
-            <section class="general_information">
-                <div>
-                    <div class="title">
-                        <span class="spin"><img src="img/ico_spin.svg"></span>
-                        <span class="title_text">General information</span>
-                    </div>
-                    <div class="items">
-                        <div>
-                            <span>
-                                <label for="general-templateName">Template Name</label>
-                                <input data-tooltip="only write number" type="text" id="general-templateName" name="info" value="PSC Beam">
-                            </span>
-                            <span>
-                                <label for="general-templateType">Template Type</label>
-                                <input type="text" id="general-templateType" name="info" value="Assembly Unit" readonly>
-                        <!--  input의 id와 label for를 연결. name은 submit data 정의 -->
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </main>
-        <!-- 요기까지 tab1 컨텐츠 -->
-
-        <main id="tab02-content">
-            <section class="bridge_information">
+    <main id="tab01-content"> 
+        <section class="preview">
+            <div>
                 <div class="title">
                     <span class="spin"><img src="img/ico_spin.svg"></span>
-                    <span class="title_text">Bridge Information</span>
+                    <span class="title_text">Preview</span>
                 </div>
-                <div class="items">
-                    <div>
-                        <span>
-                            <label for="layout-numberOfSpans">Number of Spans</label>
-                            <select name="spans" id="layout-numberOfSpans">
-                                <option label="1" value="1"></option>
-                                <option label="2" value="2"></option>
-                                <option label="3" value="3"></option>
-                                <option label="4" value="4"></option>
-                                <option label="5" value="5"></option>
-                            </select>
-                        </span>
-                        <span>
-                            <label for="layout-totalSpanLength">Total Span Length</label>
-                            <input type="text" id="layout-totalSpanLength" name="length" value="30.20000 m" readonly>
-                        </span>
-                    </div>
-                </div>
-            </section>
-            <section class="guide">
-                <div class="title">
-                    <span class="spin"><img src="img/ico_spin.svg"></span>
-                    <span class="title_text">Guide</span>
-                </div>
-                <div class="image">
-                    <img src="img/support_info.png" alt="">
+                <div>
+                    <img src="img/PSC_preview.png" alt="">
                 </div>                
-            </section>
-            <section class="notitle support">
-                <div class="items toggle_btn">
-                    <input type="radio" name="support" id="layout-support1" checked="checked">
-                    <label for="layout-support1">Support1</label>
-                    <input type="radio" name="support" id="layout-support2">
-                    <label for="layout-support2">Support2</label>
-                    <input type="radio" name="support" id="layout-support3">
-                    <label for="layout-support3">Support3</label>
-                    <input type="radio" name="support" id="layout-support4">
-                    <label for="layout-support4">Support4</label>
-                    <input type="radio" name="support" id="layout-support5">
-                    <label for="layout-support5">Support5</label>
-                    <input type="radio" name="support" id="layout-support6">
-                    <label for="layout-support6">Support6</label>
-                </div> 
-                <div class="items droplistAndadd">
-                    <form>
-                        <label for="layout-copyDataToOtherSupports">Copy Data to Other Supports</label>
-                            <select name="support" id="layout-copyDataToOtherSupports">
-                                <option label="All" value="All"></option>
-                                <option label="Support2" value="Support2"></option>
-                                <option label="Support3" value="Support3"></option>
-                                <option label="Support4" value="Support4"></option>
-                            </select>
-                    </form>
-                    <div class="add">
-                        <button class="add" id="layout-copySupports" type="button">+</button>
-                    </div>
-                </div>               
-            </section>
-            
-            <section class="configuration">
+            </div>
+        </section>
+        <section class="general_information">
+            <div>
                 <div class="title">
                     <span class="spin"><img src="img/ico_spin.svg"></span>
-                    <span class="title_text">Configuration</span>
+                    <span class="title_text">General information</span>
                 </div>
                 <div class="items">
-                    <label for="layout-supportName">Support Name</label>
-                        <select name="support_name" id="layout-supportName">
-                            <option label="A1" value="A1"></option>
-                            <option label="P1" value="P1"></option>
-                            <option label="P2" value="P2"></option>
-                            <option label="P3" value="P3"></option>
-                            <option label="P4" value="P4"></option>                                
-                            <option label="A2" value="A2"></option>
+                    <div>
+                        <span>
+                            <label for="general-templateName">Template Name</label>
+                            <input data-tooltip="only write number" type="text" id="general-templateName" name="info" value="PSC Beam">
+                        </span>
+                        <span>
+                            <label for="general-templateType">Template Type</label>
+                            <input type="text" id="general-templateType" name="info" value="Assembly Unit" readonly>
+                    <!--  input의 id와 label for를 연결. name은 submit data 정의 -->
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- 요기까지 tab1 컨텐츠 -->
+
+    <main id="tab02-content">
+        <section class="bridge_information">
+            <div class="title">
+                <span class="spin"><img src="img/ico_spin.svg"></span>
+                <span class="title_text">Bridge Information</span>
+            </div>
+            <div class="items">
+                <div>
+                    <span>
+                        <label for="layout-numberOfSpans">Number of Spans</label>
+                        <select name="spans" id="layout-numberOfSpans">
+                            <option label="1" value="1"></option>
+                            <option label="2" value="2"></option>
+                            <option label="3" value="3"></option>
+                            <option label="4" value="4"></option>
+                            <option label="5" value="5"></option>
                         </select>
+                    </span>
+                    <span>
+                        <label for="layout-totalSpanLength">Total Span Length</label>
+                        <input type="text" id="layout-totalSpanLength" name="length" value="30.20000 m" readonly>
+                    </span>
                 </div>
-                <div class="items group">
-                    <ul class="left">
-                        <li class="items">
-                            <label for="layout-spanLength">Span Length</label>
-                            <input type="text" name="config" id="layout-spanLength" value="0.00000 m" readonly>
-                        </li>
-                        <li class="items">
-                            <label for="layout-girderLength">Girder Length</label>
-                            <input type="text" name="config" id="layout-girderLength" value="0.00000 m" readonly>
-                        </li>
-                        <li class="items">
-                            <label for="layout-expansionLength">Expansion Length</label>
-                            <input type="text" name="config" id="layout-expansionLength" value="0.10000 m">
-                        </li>
-                        <li class="items">
-                            <label for="layout-slabProtrusionLength">Slab Protrusion Length</label>
-                            <input type="text" name="config" id="layout-slabProtrusionLength" value="0.05000 m">
-                        </li>
-                    </ul>
-
-                    <ul class="right">
-                        <li class="items">
-                            <label for="layout-girderConnection">Girder Connection</label>
-                            <select name="girder_connection" id="layout-girderConnection">
-                                <option label="Start" value="start"></option>
-                                <option label="2 Shoe" value="2 shoe"></option>
-                                <option label="3 Shoe" value="3 shoe"></option>
-                                <option label="End" value="end"></option>
-                            </select>
-                        </li>
-                        <li class="items">
-                            <label for="layout-bearingLocationB1">Bearing Location(B1)</label>
-                            <input type="text" name="config" id="layout-bearingLocationB1" placeholder="0.40000 m">
-                        </li>
-                        <li class="items">
-                            <label for="layout-bearingLocationB2">Bearing Location(B2)</label>
-                            <input type="text" name="config" id="layout-bearingLocationB2" value="0.00000 m" readonly>
-                        </li>
-                        <li class="items">
-                            <label for="layout-heightSpacing">Height Spacing</label>
-                            <input type="text" name="config" id="layout-heightSpacing" value="0.50000 m">
-                        </li>
-                    </ul>
+            </div>
+        </section>
+        <section class="guide">
+            <div class="title">
+                <span class="spin"><img src="img/ico_spin.svg"></span>
+                <span class="title_text">Guide</span>
+            </div>
+            <div class="image">
+                <img src="img/support_info.png" alt="">
+            </div>                
+        </section>
+        <section class="notitle support">
+            <div class="items toggle_btn">
+                <input type="radio" name="support" id="layout-support1" checked="checked">
+                <label for="layout-support1">Support1</label>
+                <input type="radio" name="support" id="layout-support2">
+                <label for="layout-support2">Support2</label>
+                <input type="radio" name="support" id="layout-support3">
+                <label for="layout-support3">Support3</label>
+                <input type="radio" name="support" id="layout-support4">
+                <label for="layout-support4">Support4</label>
+                <input type="radio" name="support" id="layout-support5">
+                <label for="layout-support5">Support5</label>
+                <input type="radio" name="support" id="layout-support6">
+                <label for="layout-support6">Support6</label>
+            </div> 
+            <div class="items droplistAndadd">
+                <form>
+                    <label for="layout-copyDataToOtherSupports">Copy Data to Other Supports</label>
+                        <select name="support" id="layout-copyDataToOtherSupports">
+                            <option label="All" value="All"></option>
+                            <option label="Support2" value="Support2"></option>
+                            <option label="Support3" value="Support3"></option>
+                            <option label="Support4" value="Support4"></option>
+                        </select>
+                </form>
+                <div class="add">
+                    <button class="add" id="layout-copySupports" type="button">+</button>
                 </div>
-            </section>
-        </main>
-        <!-- 요기까지 tabs02 컨텐츠 -->
+            </div>               
+        </section>
+        
+        <section class="configuration">
+            <div class="title">
+                <span class="spin"><img src="img/ico_spin.svg"></span>
+                <span class="title_text">Configuration</span>
+            </div>
+            <div class="items">
+                <label for="layout-supportName">Support Name</label>
+                    <select name="support_name" id="layout-supportName">
+                        <option label="A1" value="A1"></option>
+                        <option label="P1" value="P1"></option>
+                        <option label="P2" value="P2"></option>
+                        <option label="P3" value="P3"></option>
+                        <option label="P4" value="P4"></option>                                
+                        <option label="A2" value="A2"></option>
+                    </select>
+            </div>
+            <div class="items group">
+                <ul class="left">
+                    <li class="items">
+                        <label for="layout-spanLength">Span Length</label>
+                        <input type="text" name="config" id="layout-spanLength" value="0.00000 m" readonly>
+                    </li>
+                    <li class="items">
+                        <label for="layout-girderLength">Girder Length</label>
+                        <input type="text" name="config" id="layout-girderLength" value="0.00000 m" readonly>
+                    </li>
+                    <li class="items">
+                        <label for="layout-expansionLength">Expansion Length</label>
+                        <input type="text" name="config" id="layout-expansionLength" value="0.10000 m">
+                    </li>
+                    <li class="items">
+                        <label for="layout-slabProtrusionLength">Slab Protrusion Length</label>
+                        <input type="text" name="config" id="layout-slabProtrusionLength" value="0.05000 m">
+                    </li>
+                </ul>
 
-        <main id="tab03-content">
-            <section class="notitle span_btn">
-                <div class="items toggle_btn">
-                    <input type="radio" name="span" id="model-span1" checked>
-                    <label for="model-span1">Span 1</label>
-                    <input type="radio" name="span" id="model-span2">
-                    <label for="model-span2">Span 2</label>
-                    <input type="radio" name="span" id="model-span3">
-                    <label for="model-span3">Span 3</label>
-                    <input type="radio" name="span" id="model-span4">
-                    <label for="model-span4">Span 4</label>
-                    <input type="radio" name="span" id="model-span5">
-                    <label for="model-span5">Span 5</label>
-                </div>  
-                <div class="items droplistAndadd">
+                <ul class="right">
+                    <li class="items">
+                        <label for="layout-girderConnection">Girder Connection</label>
+                        <select name="girder_connection" id="layout-girderConnection">
+                            <option label="Start" value="start"></option>
+                            <option label="2 Shoe" value="2 shoe"></option>
+                            <option label="3 Shoe" value="3 shoe"></option>
+                            <option label="End" value="end"></option>
+                        </select>
+                    </li>
+                    <li class="items">
+                        <label for="layout-bearingLocationB1">Bearing Location(B1)</label>
+                        <input type="text" name="config" id="layout-bearingLocationB1" placeholder="0.40000 m">
+                    </li>
+                    <li class="items">
+                        <label for="layout-bearingLocationB2">Bearing Location(B2)</label>
+                        <input type="text" name="config" id="layout-bearingLocationB2" value="0.00000 m" readonly>
+                    </li>
+                    <li class="items">
+                        <label for="layout-heightSpacing">Height Spacing</label>
+                        <input type="text" name="config" id="layout-heightSpacing" value="0.50000 m">
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </main>
+    <!-- 요기까지 tabs02 컨텐츠 -->
+
+    <main id="tab03-content">
+        <section class="notitle span_btn">
+            <div class="items toggle_btn">
+                <input type="radio" name="span" id="model-span1" checked>
+                <label for="model-span1">Span 1</label>
+                <input type="radio" name="span" id="model-span2">
+                <label for="model-span2">Span 2</label>
+                <input type="radio" name="span" id="model-span3">
+                <label for="model-span3">Span 3</label>
+                <input type="radio" name="span" id="model-span4">
+                <label for="model-span4">Span 4</label>
+                <input type="radio" name="span" id="model-span5">
+                <label for="model-span5">Span 5</label>
+            </div>  
+            <div class="items droplistAndadd">
+                <form>
+                    <label for="model-copyDataToOtherSpans">Copy Data to Other Spans</label>
+                    <select name="other_spans" id="model-copyDataToOtherSpans">
+                        <option value="1">All</option>
+                        <option label="Span 2" value="span 2"></option>
+                        <option label="Span 3" value="span 3"></option>
+                        <option label="Span 4" value="span 4"></option>
+                        <option label="Span 5" value="span 5"></option>
+                    </select>
+                </form>
+                <div class="add">
+                    <button type="button">+</button>
+                </div>
+            </div>
+        </section>
+        <section class="notitle consider">
+            <div class="items">
+                <form class="checkbox">
+                    <label for="model-considerBridgeWidening">Consider Bridge Widening</label>
+                    <input type="checkbox" id="model-considerBridgeWidening" name="consider">
+                </form>
+            </div>
+        </section>
+        <section class="sub_section tabs"> <!--서브탭 포함된 섹션 영역-->
+            <nav class="tabs depth2">
+                <div>
+                    <input type="radio" name="tabs-depth2" id="model-corssSectionTab" checked>
+                    <label class="tab" for="model-corssSectionTab">Cross Section</label>
+                </div>
+                <div>
+                    <input type="radio" name="tabs-depth2" id="model-deskSlabTab">
+                    <label class="tab" for="model-deskSlabTab">Desk Slab</label>
+                </div>
+                <div>
+                    <input type="radio" name="tabs-depth2" id="model-crossBeamTab" >
+                    <label class="tab" for="model-crossBeamTab">Corss Beam</label>
+                </div>
+                <div>
+                    <input type="radio" name="tabs-depth2" id="model-bearingSettingTab" >
+                    <label class="tab" for="model-bearingSettingTab">Bearing Setting</label>
+                </div>
+            </div> 
+            </nav>
+            <section class="sub_section cross_section"> <!--서브탭별 콘텐츠 섹션 : 탭마다 이 섹션을 교체 -->
+                <div class="items girder">
                     <form>
-                        <label for="model-copyDataToOtherSpans">Copy Data to Other Spans</label>
-                        <select name="other_spans" id="model-copyDataToOtherSpans">
-                            <option value="1">All</option>
-                            <option label="Span 2" value="span 2"></option>
-                            <option label="Span 3" value="span 3"></option>
-                            <option label="Span 4" value="span 4"></option>
-                            <option label="Span 5" value="span 5"></option>
+                        <label for="model-girderAlignment">Girder Alignmnet</label>
+                        <input type="text" name="type" id="model-girderAlignment" value="0.00000 m">
+                    </form>
+                    <form>
+                        <label for="layout-girderNumberr">Girder Number</label>
+                        <select name="girder_number" id="layout-girderNumber">
+                            <option label="1 EA" value="1"></option>
+                            <option label="2 EA" value="2"></option>
+                            <option label="3 EA" value="3"></option>
+                            <option label="4 EA" value="4"></option>
+                            <option label="5 EA" value="5"></option>
+                            <option label="6 EA" value="6"></option>
+                            <option label="7 EA" value="7"></option>
+                            <option label="8 EA" value="8"></option>
+                            <option label="9 EA" value="9"></option>
+                            <option label="10 EA" value="10"></option>
                         </select>
-                    </form>
-                    <div class="add">
-                        <button type="button">+</button>
-                    </div>
+                    </form>       
                 </div>
-            </section>
-            <section class="notitle consider">
-                <div class="items">
-                    <form class="checkbox">
-                        <label for="model-considerBridgeWidening">Consider Bridge Widening</label>
-                        <input type="checkbox" id="model-considerBridgeWidening" name="consider">
-                    </form>
-                </div>
-            </section>
-            <section class="sub_section tabs"> <!--서브탭 포함된 섹션 영역-->
-                <nav class="tabs depth2">
+                <nav class="tabs start-end">
                     <div>
-                        <input type="radio" name="tabs-depth2" id="model-corssSectionTab" checked>
-                        <label class="tab" for="model-corssSectionTab">Cross Section</label>
+                        <input type="radio" name="cross-start-end" id="corssSection-startTab" checked>
+                        <label class="tab" for="corssSection-startTab">Start</label>
                     </div>
                     <div>
-                        <input type="radio" name="tabs-depth2" id="model-deskSlabTab">
-                        <label class="tab" for="model-deskSlabTab">Desk Slab</label>
-                    </div>
-                    <div>
-                        <input type="radio" name="tabs-depth2" id="model-crossBeamTab" >
-                        <label class="tab" for="model-crossBeamTab">Corss Beam</label>
-                    </div>
-                    <div>
-                        <input type="radio" name="tabs-depth2" id="model-bearingSettingTab" >
-                        <label class="tab" for="model-bearingSettingTab">Bearing Setting</label>
+                        <input type="radio" name="cross-start-end" id="crossSection-endTab">
+                        <label class="tab" for="crossSection-endTab">End</label>
                     </div>
                 </div> 
-                </nav>
-                <section class="sub_section cross_section"> <!--서브탭별 콘텐츠 섹션 : 탭마다 이 섹션을 교체 -->
-                    <div class="items girder">
-                        <form>
-                            <label for="model-girderAlignment">Girder Alignmnet</label>
-                            <input type="text" name="type" id="model-girderAlignment" value="0.00000 m">
-                        </form>
-                        <form>
-                            <label for="layout-girderNumberr">Girder Number</label>
-                            <select name="girder_number" id="layout-girderNumber">
-                                <option label="1 EA" value="1"></option>
-                                <option label="2 EA" value="2"></option>
-                                <option label="3 EA" value="3"></option>
-                                <option label="4 EA" value="4"></option>
-                                <option label="5 EA" value="5"></option>
-                                <option label="6 EA" value="6"></option>
-                                <option label="7 EA" value="7"></option>
-                                <option label="8 EA" value="8"></option>
-                                <option label="9 EA" value="9"></option>
-                                <option label="10 EA" value="10"></option>
-                            </select>
-                        </form>       
+                </nav>                
+                <div class="left-right">
+                    <div class="items left">
+                        <div class="items offset">
+                                <label for="model-layoutOffset">Layout Offset</label>
+                                <input type="text" name="offset" id="model-layoutOffset" value="0.00000 m">
+                        </div>
+                            <img src="img/cross section.png">
+                    </div>
+                    <div>
+                        <ul class="items right">
+                            <li>
+                                <label for="model-girderSpacing">Girder Spacing</label>
+                                <input type="text" name="girder" id="model-girderSpacing" value="2.50000 m">
+                            </li>
+                            <li>
+                                <label for="model-girder_1">Girder-1</label>
+                                <input type="text" name="girder" id="model-girder_1" value="-11.25000 m">
+                            </li>
+                            <li>
+                                <button type="button">Apply</button>
+                            </li>
+                            <li>
+                                <label for="model-girder_2">Girder-2</label>
+                                <input type="text" name="girder" id="model-girder_2" value="-8.75000 m">
+                            </li>
+                            <li>
+                                <label for="model-girder_3">Girder-3</label>
+                                <input type="text" name="girder" id="model-girder_3" value="-6.25000 m">
+                            </li>
+                            <li>
+                                <label for="model-girder_4">Girder-4</label>
+                                <input type="text" name="girder" id="model-girder_4" value="-3.75000 m">
+                            </li>
+                            <li>
+                                <label for="model-girder_5">Girder-5</label>
+                                <input type="text" name="girder" id="model-girder_5" value="-1.25000 m">
+                            </li>
+                            <li>
+                                <label for="model-girder_6">Girder-6</label>
+                                <input type="text" name="girder" id="model-girder_6" value="1.25000 m">
+                            </li>
+                            <li>
+                                <label for="model-girder_7">Girder-7</label>
+                                <input type="text" name="girder" id="model-girder_7" value="3.75000 m">
+                            </li>
+                            <li>
+                                <label for="model-girder_8">Girder-8</label>
+                                <input type="text" name="girder" id="model-girder_8" value="6.25000 m">
+                            </li>
+                            <li>
+                                <label for="model-girder_9">Girder-9</label>
+                                <input type="text" name="girder" id="model-girder_9" value="8.75000 m">
+                            </li>
+                            <li>
+                                <label for="model-girder_10">Girder-10</label>
+                                <input type="text" name="girder" id="model-girder_10" value="11.25000 m">
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        <!-- 서브탭 섹션 cross sectin content 끝 -->
+        <!-- 서브탭 섹션 desk slab content 시작-->
+            <section class="sub_section desk_slab"> <!--서브탭별 콘텐츠 섹션 : 탭마다 이 섹션을 교체 -->
+                
+                    <div class="items imgAndtext">
+                        <div class="left">
+                            
+                            <img src="img/guide_deck_slab.png">
+                            
+                        </div>
+                        <div class="right">
+                            <ul class="text_box">
+                                <li>
+                                    <label for="model-paveThickness">Pave.Thickness</label>
+                                    <input type="text" name="thickness" id="model-paveThickness" value="0.08000 m">
+                                </li>
+                                <li>
+                                    <label for="model-slabThickness">Slab Thickness</label>
+                                    <input type="text" name="thickness" id="model-slabThickness" value="0.24000 m">
+                                </li>
+                                <li>
+                                    <label for="model-verticalSag">Vertical Sag</label>
+                                    <input type="text" name="thickness" id="model-verticalSag" value="0.00000 m">
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                     <nav class="tabs start-end">
                         <div>
-                            <input type="radio" name="cross-start-end" id="corssSection-startTab" checked>
-                            <label class="tab" for="corssSection-startTab">Start</label>
+                            <input type="radio" name="deck-start-end" id="deckslab-startTab" checked>
+                            <label class="tab" for="deckslab-startTab">Start</label>
                         </div>
                         <div>
-                            <input type="radio" name="cross-start-end" id="crossSection-endTab">
-                            <label class="tab" for="crossSection-endTab">End</label>
+                            <input type="radio" name="deck-start-end" id="deckslab-endTab">
+                            <label class="tab" for="deckslab-endTab">End</label>
                         </div>
                     </div> 
-                    </nav>                
-                    <div class="left-right">
-                        <div class="items left">
-                            <div class="items offset">
-                                    <label for="model-layoutOffset">Layout Offset</label>
-                                    <input type="text" name="offset" id="model-layoutOffset" value="0.00000 m">
-                            </div>
-                                <img src="img/cross section.png">
+                    </nav>  
+                
+                <div class="items desk-width">
+                    <div class="left_content">
+                        <label for="model-deckWidth">Desk Width</label>
+                        <input type="text" name="width" id="model-deckWidth" value="18.00000 m">
+                    </div>
+                    <div class="center_content">
+                        <ul>
+                            <li>
+                                <label for="model-spacingL1">Spacing(L1)</label>
+                                <input type="text" name="spacing" id="model-spacingL1" value="0.45000 m">
+                            </li>
+                            <li>
+                                <label for="model-spacingL2">Spacing(L2)</label>
+                                <input type="text" name="spacing" id="model-spacingL2" value="8.245000 m" readonly>
+                            </li>
+                            <li>
+                                <label for="model-spacingL3">Spacing(L3)</label>
+                                <input type="text" name="spacing" id="model-spacingL3" value="0.61000 m">
+                            </li>
+                            <li>
+                                <label for="model-spacingL4">Spacing(L4)</label>
+                                <input type="text" name="spacing" id="model-spacingL4" value="8.24500 m" readonly>
+                            </li>
+                            <li>
+                                <label for="model-spacingL5">Spacing(L5)</label>
+                                <input type="text" name="spacing" id="model-spacingL5" value="0.45000 m">
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="right_content">
+                        <ul>
+                            <li>
+                                <label for="model-typeL1">Type(L1)</label>
+                                <select name="type_l1" id="model-typeL1">
+                                    <option label="Left Barrier" value="1"></option>
+                                    <option label="Road" value="2"></option>
+                                    <option label="Median Strip" value="3"></option>
+                                    <option label="Right Barrier" value="4"></option>
+                                </select>
+                            </li>
+                            <li>
+                                <label for="model-typeL2">Type(L2)</label>
+                                <select name="type_l2" id="model-typeL2">
+                                    <option label="Left Barrier" value="1"></option>
+                                    <option label="Road" value="2" selected></option>
+                                    <option label="Median Strip" value="3"></option>
+                                    <option label="Right Barrier" value="4"></option>
+                                </select>
+                            </li>
+                            <li>
+                                <label for="model-typeL3">Type(L3)</label>
+                                <select name="type_l3" id="model-typeL3">
+                                    <option label="Left Barrier" value="1"></option>
+                                    <option label="Road" value="2"></option>
+                                    <option label="Median Strip" value="3" selected></option>
+                                    <option label="Right Barrier" value="4"></option>
+                                </select>
+                            </li>
+                            <li>
+                                <label for="model-typeL4">Type(L4)</label>
+                                <select name="type_l4" id="model-typeL4">
+                                    <option label="Left Barrier" value="1"></option>
+                                    <option label="Road" value="2" selected></option>
+                                    <option label="Median Strip" value="3"></option>
+                                    <option label="Right Barrier" value="4"></option>
+                                </select>
+                            </li>
+                            <li>
+                                <label for="model-typeL5">Type(L5)</label>
+                                <select name="type_l5" id="model-typeL5">
+                                    <option label="Left Barrier" value="1"></option>
+                                    <option label="Road" value="2"></option>
+                                    <option label="Median Strip" value="3"></option>
+                                    <option label="Right Barrier" value="4" selected></option>
+                                </select>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            <!-- 서브탭 섹션 desk slab content 끝 -->
+            <!-- 서브탭 섹션 Cross Beam content 시작  -->
+            <section class="sub_section cross_beam">
+                
+                <div class="title">
+                    <span class="spin"><img src="img/ico_spin.svg"></span>
+                    <span class="title_text">Cross Beam Location</span>
+                </div>
+                <div class="items imgAndform">
+                    <div class="left">
+                        <img src="img/cross_beam_location.png">
+                    </div>
+                    <div class="right">
+                        <div class="up">
+                            <label for="model-midCrossBeam">Mid.Cross Beam</label>
+                                <select name="beam" id="model-midCrossBeam">
+                                    <option label="1 EA" value="1"></option>
+                                    <option label="2 EA" value="2"></option>
+                                    <option label="3 EA" value="3"></option>
+                                    <option label="4 EA" value="4"></option>
+                                </select>                                    
                         </div>
-                        <div>
-                            <ul class="items right">
+                        <div >
+                            <ul class="down">
                                 <li>
-                                    <label for="model-girderSpacing">Girder Spacing</label>
-                                    <input type="text" name="girder" id="model-girderSpacing" value="2.50000 m">
+                                    <label for="model-spacingBS">Spacing(BS)</label>
+                                    <input type="text" name="spacing" id="model-spacingBS" value="0.40000 m">
                                 </li>
                                 <li>
-                                    <label for="model-girder_1">Girder-1</label>
-                                    <input type="text" name="girder" id="model-girder_1" value="-11.25000 m">
+                                    <label for="model-spacingCR1">Spacing(CR1)</label>
+                                    <input type="text" name="spacing" id="model-spacingCR1" value="14.55000 m">
                                 </li>
                                 <li>
-                                    <button type="button">Apply</button>
+                                    <label for="model-spacingCR2">Spacing(CR2)</label>
+                                    <input type="text" name="spacing" id="model-spacingCR2" value="14.55000 m">
                                 </li>
                                 <li>
-                                    <label for="model-girder_2">Girder-2</label>
-                                    <input type="text" name="girder" id="model-girder_2" value="-8.75000 m">
-                                </li>
-                                <li>
-                                    <label for="model-girder_3">Girder-3</label>
-                                    <input type="text" name="girder" id="model-girder_3" value="-6.25000 m">
-                                </li>
-                                <li>
-                                    <label for="model-girder_4">Girder-4</label>
-                                    <input type="text" name="girder" id="model-girder_4" value="-3.75000 m">
-                                </li>
-                                <li>
-                                    <label for="model-girder_5">Girder-5</label>
-                                    <input type="text" name="girder" id="model-girder_5" value="-1.25000 m">
-                                </li>
-                                <li>
-                                    <label for="model-girder_6">Girder-6</label>
-                                    <input type="text" name="girder" id="model-girder_6" value="1.25000 m">
-                                </li>
-                                <li>
-                                    <label for="model-girder_7">Girder-7</label>
-                                    <input type="text" name="girder" id="model-girder_7" value="3.75000 m">
-                                </li>
-                                <li>
-                                    <label for="model-girder_8">Girder-8</label>
-                                    <input type="text" name="girder" id="model-girder_8" value="6.25000 m">
-                                </li>
-                                <li>
-                                    <label for="model-girder_9">Girder-9</label>
-                                    <input type="text" name="girder" id="model-girder_9" value="8.75000 m">
-                                </li>
-                                <li>
-                                    <label for="model-girder_10">Girder-10</label>
-                                    <input type="text" name="girder" id="model-girder_10" value="11.25000 m">
+                                    <label for="model-spacingBE">Spacing(BE)</label>
+                                    <input type="text" name="spacing" id="model-spacingBE" value="0.40000 m">
                                 </li>
                             </ul>
                         </div>
                     </div>
-                </section>
-            <!-- 서브탭 섹션 cross sectin content 끝 -->
-            <!-- 서브탭 섹션 desk slab content 시작-->
-                <section class="sub_section desk_slab"> <!--서브탭별 콘텐츠 섹션 : 탭마다 이 섹션을 교체 -->
-                    
-                        <div class="items imgAndtext">
-                            <div class="left">
-                                
-                                <img src="img/guide_deck_slab.png">
-                                
-                            </div>
-                            <div class="right">
-                                <ul class="text_box">
-                                    <li>
-                                        <label for="model-paveThickness">Pave.Thickness</label>
-                                        <input type="text" name="thickness" id="model-paveThickness" value="0.08000 m">
-                                    </li>
-                                    <li>
-                                        <label for="model-slabThickness">Slab Thickness</label>
-                                        <input type="text" name="thickness" id="model-slabThickness" value="0.24000 m">
-                                    </li>
-                                    <li>
-                                        <label for="model-verticalSag">Vertical Sag</label>
-                                        <input type="text" name="thickness" id="model-verticalSag" value="0.00000 m">
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <nav class="tabs start-end">
-                            <div>
-                                <input type="radio" name="deck-start-end" id="deckslab-startTab" checked>
-                                <label class="tab" for="deckslab-startTab">Start</label>
-                            </div>
-                            <div>
-                                <input type="radio" name="deck-start-end" id="deckslab-endTab">
-                                <label class="tab" for="deckslab-endTab">End</label>
-                            </div>
-                        </div> 
-                        </nav>  
-                    
-                    <div class="items desk-width">
-                        <div class="left_content">
-                            <label for="model-deckWidth">Desk Width</label>
-                            <input type="text" name="width" id="model-deckWidth" value="18.00000 m">
-                        </div>
-                        <div class="center_content">
-                            <ul>
-                                <li>
-                                    <label for="model-spacingL1">Spacing(L1)</label>
-                                    <input type="text" name="spacing" id="model-spacingL1" value="0.45000 m">
-                                </li>
-                                <li>
-                                    <label for="model-spacingL2">Spacing(L2)</label>
-                                    <input type="text" name="spacing" id="model-spacingL2" value="8.245000 m" readonly>
-                                </li>
-                                <li>
-                                    <label for="model-spacingL3">Spacing(L3)</label>
-                                    <input type="text" name="spacing" id="model-spacingL3" value="0.61000 m">
-                                </li>
-                                <li>
-                                    <label for="model-spacingL4">Spacing(L4)</label>
-                                    <input type="text" name="spacing" id="model-spacingL4" value="8.24500 m" readonly>
-                                </li>
-                                <li>
-                                    <label for="model-spacingL5">Spacing(L5)</label>
-                                    <input type="text" name="spacing" id="model-spacingL5" value="0.45000 m">
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="right_content">
-                            <ul>
-                                <li>
-                                    <label for="model-typeL1">Type(L1)</label>
-                                    <select name="type_l1" id="model-typeL1">
-                                        <option label="Left Barrier" value="1"></option>
-                                        <option label="Road" value="2"></option>
-                                        <option label="Median Strip" value="3"></option>
-                                        <option label="Right Barrier" value="4"></option>
-                                    </select>
-                                </li>
-                                <li>
-                                    <label for="model-typeL2">Type(L2)</label>
-                                    <select name="type_l2" id="model-typeL2">
-                                        <option label="Left Barrier" value="1"></option>
-                                        <option label="Road" value="2" selected></option>
-                                        <option label="Median Strip" value="3"></option>
-                                        <option label="Right Barrier" value="4"></option>
-                                    </select>
-                                </li>
-                                <li>
-                                    <label for="model-typeL3">Type(L3)</label>
-                                    <select name="type_l3" id="model-typeL3">
-                                        <option label="Left Barrier" value="1"></option>
-                                        <option label="Road" value="2"></option>
-                                        <option label="Median Strip" value="3" selected></option>
-                                        <option label="Right Barrier" value="4"></option>
-                                    </select>
-                                </li>
-                                <li>
-                                    <label for="model-typeL4">Type(L4)</label>
-                                    <select name="type_l4" id="model-typeL4">
-                                        <option label="Left Barrier" value="1"></option>
-                                        <option label="Road" value="2" selected></option>
-                                        <option label="Median Strip" value="3"></option>
-                                        <option label="Right Barrier" value="4"></option>
-                                    </select>
-                                </li>
-                                <li>
-                                    <label for="model-typeL5">Type(L5)</label>
-                                    <select name="type_l5" id="model-typeL5">
-                                        <option label="Left Barrier" value="1"></option>
-                                        <option label="Road" value="2"></option>
-                                        <option label="Median Strip" value="3"></option>
-                                        <option label="Right Barrier" value="4" selected></option>
-                                    </select>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </section>
-                <!-- 서브탭 섹션 desk slab content 끝 -->
-                <!-- 서브탭 섹션 Cross Beam content 시작  -->
-                <section class="sub_section cross_beam">
-                    
+                </div>
+                <div>
                     <div class="title">
                         <span class="spin"><img src="img/ico_spin.svg"></span>
-                        <span class="title_text">Cross Beam Location</span>
+                        <span class="title_text">Girder Dimension & Cross Beam Detail</span>
                     </div>
-                    <div class="items imgAndform">
-                        <div class="left">
-                            <img src="img/cross_beam_location.png">
+                    <div class="items girder_content">
+                        <div class="img">
+                            <img src="img/guide_cross_beam_detail.png">
                         </div>
-                        <div class="right">
-                            <div class="up">
-                                <label for="model-midCrossBeam">Mid.Cross Beam</label>
-                                    <select name="beam" id="model-midCrossBeam">
-                                        <option label="1 EA" value="1"></option>
-                                        <option label="2 EA" value="2"></option>
-                                        <option label="3 EA" value="3"></option>
-                                        <option label="4 EA" value="4"></option>
-                                    </select>                                    
-                            </div>
-                            <div >
-                                <ul class="down">
+                        
+                        <div class="items detail">
+                            <ul class="text">
+                                <li>
+                                    Girder:
+                                </li>
+                                <li>
+                                    End Cross Beam:
+                                </li>
+                                <li>
+                                    Middle Cross Beam:
+                                </li>
+                            </ul>
+                            <div class="input_box">
+                                <ul>
                                     <li>
-                                        <label for="model-spacingBS">Spacing(BS)</label>
-                                        <input type="text" name="spacing" id="model-spacingBS" value="0.40000 m">
+                                        <label for="model-girder_a">a</label>
+                                        <input type="text" name="girder" id="model-girder_a" value="0.70000 m">
                                     </li>
                                     <li>
-                                        <label for="model-spacingCR1">Spacing(CR1)</label>
-                                        <input type="text" name="spacing" id="model-spacingCR1" value="14.55000 m">
+                                        <label for="model-girder_b">b</label>
+                                        <input type="text" name="girder" id="model-girder_b" value="0.90000 m">
                                     </li>
                                     <li>
-                                        <label for="model-spacingCR2">Spacing(CR2)</label>
-                                        <input type="text" name="spacing" id="model-spacingCR2" value="14.55000 m">
+                                        <label for="model-girder_c">c</label>
+                                        <input type="text" name="girder" id="model-girder_c" value="1.50000 m">
+                                    </li>
+                                </ul>
+                                <ul>
+                                    <li>
+                                        <label for="model-endCrossBeam_a">a</label>
+                                        <input type="text" name="girder" id="model-endCrossBeam_a" value="0.71000 m">
                                     </li>
                                     <li>
-                                        <label for="model-spacingBE">Spacing(BE)</label>
-                                        <input type="text" name="spacing" id="model-spacingBE" value="0.40000 m">
+                                        <label for="model-endCrossBeam_b">b</label>
+                                        <input type="text" name="girder" id="model-endCrossBeam_b" value="0.30000 m">
+                                    </li>
+                                </ul>
+                                <ul>
+                                    <li>
+                                        <label for="model-middleCrossBeam_a">a</label>
+                                        <input type="text" name="girder" id="model-middleCrossBeam_a" value="1.30000 m">
+                                    </li>
+                                    <li>
+                                        <label for="model-middleCrossBeam_b">b</label>
+                                        <input type="text" name="girder" id="model-middleCrossBeam_b" value="0.30000 m">
                                     </li>
                                 </ul>
                             </div>
                         </div>
                     </div>
-                    <div>
-                        <div class="title">
-                            <span class="spin"><img src="img/ico_spin.svg"></span>
-                            <span class="title_text">Girder Dimension & Cross Beam Detail</span>
-                        </div>
-                        <div class="items girder_content">
-                            <div class="img">
-                                <img src="img/guide_cross_beam_detail.png">
-                            </div>
-                            
-                            <div class="items detail">
-                                <ul class="text">
-                                    <li>
-                                        Girder:
-                                    </li>
-                                    <li>
-                                        End Cross Beam:
-                                    </li>
-                                    <li>
-                                        Middle Cross Beam:
-                                    </li>
-                                </ul>
-                                <div class="input_box">
-                                    <ul>
-                                        <li>
-                                            <label for="model-girder_a">a</label>
-                                            <input type="text" name="girder" id="model-girder_a" value="0.70000 m">
-                                        </li>
-                                        <li>
-                                            <label for="model-girder_b">b</label>
-                                            <input type="text" name="girder" id="model-girder_b" value="0.90000 m">
-                                        </li>
-                                        <li>
-                                            <label for="model-girder_c">c</label>
-                                            <input type="text" name="girder" id="model-girder_c" value="1.50000 m">
-                                        </li>
-                                    </ul>
-                                    <ul>
-                                        <li>
-                                            <label for="model-endCrossBeam_a">a</label>
-                                            <input type="text" name="girder" id="model-endCrossBeam_a" value="0.71000 m">
-                                        </li>
-                                        <li>
-                                            <label for="model-endCrossBeam_b">b</label>
-                                            <input type="text" name="girder" id="model-endCrossBeam_b" value="0.30000 m">
-                                        </li>
-                                    </ul>
-                                    <ul>
-                                        <li>
-                                            <label for="model-middleCrossBeam_a">a</label>
-                                            <input type="text" name="girder" id="model-middleCrossBeam_a" value="1.30000 m">
-                                        </li>
-                                        <li>
-                                            <label for="model-middleCrossBeam_b">b</label>
-                                            <input type="text" name="girder" id="model-middleCrossBeam_b" value="0.30000 m">
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                </section>
-                <section class="sub_section bearing_setting">
-                    <div class="items group">
-                        <div class="items left">
-                            <img src="img/guide_bearing_setting.png">
-                        </div>
-                    
-                        <div class="items right">
-                            <div class="up">
-                                <label for="model-bearingHeight">Bearing Height</label>
-                                <input type="text" name="height" id="model-bearingHeight" value="0.17500 m">
-                                <button type="button">Apply</button>
-                            </div>
-                            <div class="down">
-                                <ul class="down_left">
-                                    <li class="items">
-                                        <label for="model-girder1Start">Girder-1(Start)</label>
-                                        <input type="text" name="start" id="model-girder1Start" value="0.17500 m">
-                                    </li>
-                                    <li class="items">
-                                        <label for="model-girder2Start">Girder-2(Start)</label>
-                                        <input type="text" name="start" id="model-girder2Start" value="0.17500 m">
-                                    </li>
-                                    <li class="items">
-                                        <label for="model-girder3Start">Girder-3(Start)</label>
-                                        <input type="text" name="start" id="model-girder3Start" value="0.17500 m">
-                                    </li>
-                                    <li class="items">
-                                        <label for="model-girder4Start">Girder-4(Start)</label>
-                                        <input type="text" name="start" id="model-girder4Start" value="0.17500 m">
-                                    </li>
-                                    <li class="items">
-                                        <label for="model-girder5Start">Girder-5(Start)</label>
-                                        <input type="text" name="start" id="model-girder5Start" value="0.17500 m">
-                                    </li>
-                                    <li class="items">
-                                        <label for="model-girder6Start">Girder-6(Start)</label>
-                                        <input type="text" name="start" id="model-girder6Start" value="0.17500 m">
-                                    </li>
-                                    <li class="items">
-                                        <label for="model-girder7Start">Girder-7(Start)</label>
-                                        <input type="text" name="start" id="model-girder7Start" value="0.17500 m">
-                                    </li>
-                                    <li class="items">
-                                        <label for="model-girder8Start">Girder-8(Start)</label>
-                                        <input type="text" name="start" id="model-girder8Start" value="0.17500 m">
-                                    </li>
-                                    <li class="items">
-                                        <label for="model-girder9Start">Girder-9(Start)</label>
-                                        <input type="text" name="start" id="model-girder9Start" value="0.17500 m">
-                                    </li>
-                                    <li class="items">
-                                        <label for="model-girder10Start">Girder-10(Start)</label>
-                                        <input type="text" name="start" id="model-girder10Start" value="0.17500 m">
-                                    </li>
-                                </ul>
-                                <ul class="down_right">
-                                    <li class="items">
-                                        <label for="model-girder1End">Girder-1(End)</label>
-                                        <input type="text" name="end" id="model-girder1End" value="0.17500 m">
-                                    </li>
-                                    <li class="items">
-                                        <label for="enmodel-girder2End">Girder-2(End)</label>
-                                        <input type="text" name="end" id="model-girder2End" value="0.17500 m">
-                                    </li>
-                                    <li class="items">
-                                        <label for="model-girder3End">Girder-3(End)</label>
-                                        <input type="text" name="end" id="model-girder3End" value="0.17500 m">
-                                    </li>
-                                    <li class="items">
-                                        <label for="model-girder4End">Girder-4(End)</label>
-                                        <input type="text" name="end" id="model-girder4End" value="0.17500 m">
-                                    </li>
-                                    <li class="items">
-                                        <label for="model-girder5End">Girder-5(End)</label>
-                                        <input type="text" name="end" id="model-girder5End" value="0.17500 m">
-                                    </li>
-                                    <li class="items">
-                                        <label for="model-girder6End">Girder-6(End)</label>
-                                        <input type="text" name="end" id="model-girder6End" value="0.17500 m">
-                                    </li>
-                                    <li class="items">
-                                        <label for="model-girder7End">Girder-7(End)</label>
-                                        <input type="text" name="end" id="model-girder7End" value="0.17500 m">
-                                    </li>
-                                    <li class="items">
-                                        <label for="model-girder8End">Girder-8(End)</label>
-                                        <input type="text" name="end" id="model-girder8End" value="0.17500 m">
-                                    </li>
-                                    <li class="items">
-                                        <label for="model-girder9End">Girder-9(End)</label>
-                                        <input type="text" name="end" id="model-girder9End" value="0.17500 m">
-                                    </li>
-                                    <li class="items">
-                                        <label for="model-girder10End">Girder-10(End)</label>
-                                        <input type="text" name="end" id="model-girder10End" value="0.17500 m">
-                                    </li>
-                                </ul>
-                                
-                            </div>
-                        </div>
-                    </div>
+                </div>
+                
             </section>
-            <!-- 서브탭 포함 섹션 끝 -->
-        </main>
-
+            <section class="sub_section bearing_setting">
+                <div class="items group">
+                    <div class="items left">
+                        <img src="img/guide_bearing_setting.png">
+                    </div>
+                
+                    <div class="items right">
+                        <div class="up">
+                            <label for="model-bearingHeight">Bearing Height</label>
+                            <input type="text" name="height" id="model-bearingHeight" value="0.17500 m">
+                            <button type="button">Apply</button>
+                        </div>
+                        <div class="down">
+                            <ul class="down_left">
+                                <li class="items">
+                                    <label for="model-girder1Start">Girder-1(Start)</label>
+                                    <input type="text" name="start" id="model-girder1Start" value="0.17500 m">
+                                </li>
+                                <li class="items">
+                                    <label for="model-girder2Start">Girder-2(Start)</label>
+                                    <input type="text" name="start" id="model-girder2Start" value="0.17500 m">
+                                </li>
+                                <li class="items">
+                                    <label for="model-girder3Start">Girder-3(Start)</label>
+                                    <input type="text" name="start" id="model-girder3Start" value="0.17500 m">
+                                </li>
+                                <li class="items">
+                                    <label for="model-girder4Start">Girder-4(Start)</label>
+                                    <input type="text" name="start" id="model-girder4Start" value="0.17500 m">
+                                </li>
+                                <li class="items">
+                                    <label for="model-girder5Start">Girder-5(Start)</label>
+                                    <input type="text" name="start" id="model-girder5Start" value="0.17500 m">
+                                </li>
+                                <li class="items">
+                                    <label for="model-girder6Start">Girder-6(Start)</label>
+                                    <input type="text" name="start" id="model-girder6Start" value="0.17500 m">
+                                </li>
+                                <li class="items">
+                                    <label for="model-girder7Start">Girder-7(Start)</label>
+                                    <input type="text" name="start" id="model-girder7Start" value="0.17500 m">
+                                </li>
+                                <li class="items">
+                                    <label for="model-girder8Start">Girder-8(Start)</label>
+                                    <input type="text" name="start" id="model-girder8Start" value="0.17500 m">
+                                </li>
+                                <li class="items">
+                                    <label for="model-girder9Start">Girder-9(Start)</label>
+                                    <input type="text" name="start" id="model-girder9Start" value="0.17500 m">
+                                </li>
+                                <li class="items">
+                                    <label for="model-girder10Start">Girder-10(Start)</label>
+                                    <input type="text" name="start" id="model-girder10Start" value="0.17500 m">
+                                </li>
+                            </ul>
+                            <ul class="down_right">
+                                <li class="items">
+                                    <label for="model-girder1End">Girder-1(End)</label>
+                                    <input type="text" name="end" id="model-girder1End" value="0.17500 m">
+                                </li>
+                                <li class="items">
+                                    <label for="enmodel-girder2End">Girder-2(End)</label>
+                                    <input type="text" name="end" id="model-girder2End" value="0.17500 m">
+                                </li>
+                                <li class="items">
+                                    <label for="model-girder3End">Girder-3(End)</label>
+                                    <input type="text" name="end" id="model-girder3End" value="0.17500 m">
+                                </li>
+                                <li class="items">
+                                    <label for="model-girder4End">Girder-4(End)</label>
+                                    <input type="text" name="end" id="model-girder4End" value="0.17500 m">
+                                </li>
+                                <li class="items">
+                                    <label for="model-girder5End">Girder-5(End)</label>
+                                    <input type="text" name="end" id="model-girder5End" value="0.17500 m">
+                                </li>
+                                <li class="items">
+                                    <label for="model-girder6End">Girder-6(End)</label>
+                                    <input type="text" name="end" id="model-girder6End" value="0.17500 m">
+                                </li>
+                                <li class="items">
+                                    <label for="model-girder7End">Girder-7(End)</label>
+                                    <input type="text" name="end" id="model-girder7End" value="0.17500 m">
+                                </li>
+                                <li class="items">
+                                    <label for="model-girder8End">Girder-8(End)</label>
+                                    <input type="text" name="end" id="model-girder8End" value="0.17500 m">
+                                </li>
+                                <li class="items">
+                                    <label for="model-girder9End">Girder-9(End)</label>
+                                    <input type="text" name="end" id="model-girder9End" value="0.17500 m">
+                                </li>
+                                <li class="items">
+                                    <label for="model-girder10End">Girder-10(End)</label>
+                                    <input type="text" name="end" id="model-girder10End" value="0.17500 m">
+                                </li>
+                            </ul>
+                            
+                        </div>
+                    </div>
+                </div>
+        </section>
+        <!-- 서브탭 포함 섹션 끝 -->
+    </main>
 
     <!-- 요기부터 footer -->
     <footer>
@@ -691,6 +686,5 @@
             </div>
         </section>
     </footer>
-    
 </body>
 </html>
