@@ -280,21 +280,14 @@ input[readonly] {
 
 /* footer 시작 */
 footer {
-  background-color: var(--bg-color);
-  margin: 0 0px;
+  background-color: var(--block-color);
+  padding: 5px 10px 5px 10px;
 }
-footer section {
-  /*블록 영역 정의 */
+footer .space-between {
   display: flex;
   justify-content: space-between;
-  background-color: var(--block-color);
-  padding: 10px 14px 10px 14px;
 }
-footer section > div {
-  display: flex;
-  align-items: center;
-}
-footer section button {
+footer button {
   width: var(--btn-b-width);
   height: var(--btn-height);
 }

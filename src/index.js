@@ -81,9 +81,57 @@ numberOfSpansFunction2.addEventListener("change", () => {
 });
 numberOfSpansFunction2.dispatchEvent(new Event("change"));
 
+
+
+
+
+/*
+    해결해야하는 문제
+    3) Show Hide를 Class로 통제하는 방식. 지금 해야할 듯. NumSpans 값에 의해서 옵션의 개수가 변하네.
+    4) NumSpans 값에 따라서 초기값도 변하네.
+    4번은 3번과 같은 방식으로 해결하면 될 것 같은데 ?? Object를 사용하면 문제 없을 듯.
+
+    dataTarget 이라는 이름을 부여한 이유: 1) json 파일 수월하게 만들기 위해.
+    2) 토글 버튼을 바꿀 때 get과 set 함수를 수월하게 사용하기 위해.
+
+    그런데 "equation" 및 "sum"을 사용하고 싶은 경우 id 를 사용해야할 것 같네.
+
+    id 사용하는 거는 ㄹㅇ 미련한 짓일 수 있어.
+
+    왜냐면 저 값이 계속해서 업데이트 되기 위해서는 onblur 함수로 연결이 되어야 해.
+    그런데 여기서 id 를 넣는다고 그게 해결이 되니 ?? 네버 에버 에버 에버 에버
+    onblur의 적용 대상이 바뀌어야 한다는 점 -> 이게 제일로 중요한 거니까... 무일아.
+    지금 equation, sum 이 짓하는 거는 ㄹㅇ 노쓸모임.
+
+    아냐아냐 쓸모 많을 것 같아... onblur 를 붙일 대상과 합에 포함시킬 대상은 결과적으로 같잖아.
+    id로 통제하는 것이 결과적으로는 쓸모가 꽤 많을 것 같은데 ??
+    그리고 솔직히 선택자를 자동으로 생성해주는 것은 내가 자신이 없다.
+
+    지금까지는 set 이랑 get 에서 그리고 json 생성에서 dataTarget 이라는 이름으로 갔었는데...
+    길게 봤을 때 id 를 부여하는 방식이 결코 틀리지 않을 것 같아.
+
+    일단 다 바꾸려고는 하지 말고, equation 은 id 로 통제하는 방식을 구현해보자.
+    이거를 먼저 구현하고 클래스로 Function 통제하는 것 구현해보면 될 것 같네.
+
+    와 eval 함수가 진짜로 혁신적이구나 ㄷㄷ 계산은 끝마쳤네 성공적으로 !!
+
+    이렇게까지 해야하는 가에 대해서는 좀 고민이 되네.
+
+    그런데 문제가 set을 부른 후 get을 부르다 보니 함수를 해제시켜 버리네 ㅠㅠㅠㅠㅠ
+    처음부터 Label을 들고 있게끔 만들어야 해 !!
+*/
+
+
+
+
 // Layout 탭 Support 토글에 넣을 초기값
-let toggleSupportData =[
-    ["A1", "0.00000 m", "0.00000 m", "0.10000 m", "0.05000 m", "Start", "0.40000 m", "0.00000 m", "0.50000 m"]
+let toggleSupportData = [
+    ["A1", ["readonly", "0.00000 m"], ["readonly", "0.00000 m"], "0.10000 m", "0.05000 m", "Start", "0.40000 m", ["readonly", "0.00000 m"], "0.50000 m"],
+    ["A1", ["readonlyequation", "toggleSupportData[0][3]+toggleSupportData[0][4]+#layout-GirderLength+0.5*#layout-SlabProtrusionLength"], "29.90000 m", ["readonly", "0.00000 m"], "0.10000 m", "Start", "0.40000 m", "0.40000 m", "0.50000 m"],
+    ["A1", ["readonlyequation", "0.5*toggleSupportData[1][4]+#layout-GirderLength+0.5*#layout-SlabProtrusionLength"], "29.90000 m", ["readonly", "0.00000 m"], "0.10000 m", "Start", "0.40000 m", "0.00000 m", "0.50000 m"],
+    ["A1", ["readonlyequation", "0.5*toggleSupportData[2][4]+#layout-GirderLength+0.5*#layout-SlabProtrusionLength", ""], "29.90000 m", ["readonly", "0.00000 m"], "0.10000 m", "Start", "0.40000 m", "0.00000 m", "0.50000 m"],
+    ["A1", ["readonlyequation", "0.5*toggleSupportData[3][4]+#layout-GirderLength+0.5*#layout-SlabProtrusionLength", ""], "29.90000 m", ["readonly", "0.00000 m"], "0.10000 m", "Start", "0.40000 m", "0.00000 m", "0.50000 m"],
+    ["A1", ["readonlyequation", "0.5*toggleSupportData[4][4]+#layout-GirderLength+#layout-ExpansionLength+#layout-SlabProtrusionLength", ""], "29.90000 m", "0.10000 m", "0.05000 m", "End", "0.40000 m", ["readonly", "0.00000 m"], "0.50000 m"]
 ];
 let toggleSupportDataLabel = [];
 let toggleSupportDataLabelFilled = false;
@@ -95,45 +143,128 @@ const supportContents = document.querySelector("#supportContents");
 supportLabels.forEach((supportLabel) => {
     supportLabel.addEventListener("mousedown", (e) => {
         let currentSupportNumber = parseInt(supportToggles.querySelector("input:checked").dataset.value);
-        toggleSupportData[currentSupportNumber] = getSupportData(supportContents);
+        getCurrentData(supportContents, toggleSupportData, currentSupportNumber);
     
         let targetSupportNumber = parseInt(document.querySelector("#" + supportLabel.getAttribute("for")).dataset.value);
-        setTargeSupportData(supportContents, toggleSupportData[targetSupportNumber]);
+        setTargerData(supportContents, toggleSupportData, targetSupportNumber);
     });
 });
 let defaultSupportNumber = parseInt(supportToggles.querySelector("input:checked").dataset.value);
-console.log(supportToggles.querySelector("input:checked"));
-setTargeSupportData(supportContents, toggleSupportData[defaultSupportNumber]);
+setTargerData(supportContents, toggleSupportData, defaultSupportNumber);
+getCurrentData(supportContents, toggleSupportData, defaultSupportNumber);
 
-function getSupportData(supportContents) {
-    let currentSupportData = [];
+
+
+// Model 탭 Span 토글에 넣을 초기값
+let toggleSpanData = [
+    ["0.11111 m", "7", "0.00000 m", "2.50000 m", "-11.25000 m", "-8.75000 m", "-6.25000 m", "-3.75000 m", "-1.25000 m", "1.25000 m", "3.75000 m", "6.25000 m", "8.75000 m", "11.25000 m", "0.08000 m", "0.24000 m", "0.00000 m", "18.00000 m", "0.45000 m", ["readonly", "8.24500 m"], "0.61000 m", ["readonly", "8.24500 m"], "0.45000 m", "Left Barrier", "Road", "Median Strip", "Road", "Right Barrier", "1", "0.40000 m", "14.55000 m", "14.55000 m", "0.00000 m", "0.00000 m", "0.40000 m", "0.70000 m", "0.90000 m", "1.50000 m", "0.71000 m", "1.30000 m", "0.30000 m", "0.30000 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m"],  
+    ["0.22222 m", "7", "0.00000 m", "2.50000 m", "-11.25000 m", "-8.75000 m", "-6.25000 m", "-3.75000 m", "-1.25000 m", "1.25000 m", "3.75000 m", "6.25000 m", "8.75000 m", "11.25000 m", "0.08000 m", "0.24000 m", "0.00000 m", "18.00000 m", "0.45000 m", ["readonly", "8.24500 m"], "0.61000 m", ["readonly", "8.24500 m"], "0.45000 m", "Left Barrier", "Road", "Median Strip", "Road", "Right Barrier", "1", "0.40000 m", "14.55000 m", "14.55000 m", "0.00000 m", "0.00000 m", "0.40000 m", "0.70000 m", "0.90000 m", "1.50000 m", "0.71000 m", "1.30000 m", "0.30000 m", "0.30000 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m"],  
+    ["0.33333 m", "7", "0.00000 m", "2.50000 m", "-11.25000 m", "-8.75000 m", "-6.25000 m", "-3.75000 m", "-1.25000 m", "1.25000 m", "3.75000 m", "6.25000 m", "8.75000 m", "11.25000 m", "0.08000 m", "0.24000 m", "0.00000 m", "18.00000 m", "0.45000 m", ["readonly", "8.24500 m"], "0.61000 m", ["readonly", "8.24500 m"], "0.45000 m", "Left Barrier", "Road", "Median Strip", "Road", "Right Barrier", "1", "0.40000 m", "14.55000 m", "14.55000 m", "0.00000 m", "0.00000 m", "0.40000 m", "0.70000 m", "0.90000 m", "1.50000 m", "0.71000 m", "1.30000 m", "0.30000 m", "0.30000 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m"],  
+    ["0.44444 m", "7", "0.00000 m", "2.50000 m", "-11.25000 m", "-8.75000 m", "-6.25000 m", "-3.75000 m", "-1.25000 m", "1.25000 m", "3.75000 m", "6.25000 m", "8.75000 m", "11.25000 m", "0.08000 m", "0.24000 m", "0.00000 m", "18.00000 m", "0.45000 m", ["readonly", "8.24500 m"], "0.61000 m", ["readonly", "8.24500 m"], "0.45000 m", "Left Barrier", "Road", "Median Strip", "Road", "Right Barrier", "1", "0.40000 m", "14.55000 m", "14.55000 m", "0.00000 m", "0.00000 m", "0.40000 m", "0.70000 m", "0.90000 m", "1.50000 m", "0.71000 m", "1.30000 m", "0.30000 m", "0.30000 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m"],  
+    ["0.55555 m", "7", "0.00000 m", "2.50000 m", "-11.25000 m", "-8.75000 m", "-6.25000 m", "-3.75000 m", "-1.25000 m", "1.25000 m", "3.75000 m", "6.25000 m", "8.75000 m", "11.25000 m", "0.08000 m", "0.24000 m", "0.00000 m", "18.00000 m", "0.45000 m", ["readonly", "8.24500 m"], "0.61000 m", ["readonly", "8.24500 m"], "0.45000 m", "Left Barrier", "Road", "Median Strip", "Road", "Right Barrier", "1", "0.40000 m", "14.55000 m", "14.55000 m", "0.00000 m", "0.00000 m", "0.40000 m", "0.70000 m", "0.90000 m", "1.50000 m", "0.71000 m", "1.30000 m", "0.30000 m", "0.30000 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m"]
+];
+let toggleSpanDataLabel = [];
+let toggleSpanDataLabelFilled = false;
+
+// Model 탭 Span 토글 작동
+const spanToggles = document.querySelector("#spanToggles");
+const spanLabels = spanToggles.querySelectorAll("label");
+const spanContents = document.querySelector("#spanContents");
+spanLabels.forEach((spanLabel) => {
+    spanLabel.addEventListener("mousedown", (e) => {
+        let currentSpanNumber = parseInt(spanToggles.querySelector("input:checked").dataset.value);
+        getCurrentData(spanContents, toggleSpanData, currentSpanNumber);
+    
+        let targetSpanNumber = parseInt(document.querySelector("#" + spanLabel.getAttribute("for")).dataset.value);
+        setTargerData(spanContents, toggleSpanData, targetSpanNumber);
+    });
+});
+let defaultSpanNumber = parseInt(spanToggles.querySelector("input:checked").dataset.value);
+setTargerData(spanContents, toggleSpanData, defaultSpanNumber);
+getCurrentData(spanContents, toggleSpanData, defaultSpanNumber);
+
+
+
+function getCurrentData(supportContents, toggleSupportData, currentSupportNumber) {
+    let currentSupportData = toggleSupportData[currentSupportNumber];
+
+    const inputSelects = [];
+    const labels = [];
 
     const dataTargets = supportContents.querySelectorAll(".dataTarget");
     dataTargets.forEach((dataTarget) => {
-        const labels = dataTarget.querySelectorAll("label");
-        const values = dataTarget.querySelectorAll("input, select");
-        if (labels.length !== values.length) {
-            console.log("Label and value numbers different.");
-            return;
-        }
+        const tempInputSelects = dataTarget.querySelectorAll("input, select");
+        const tempLabels = dataTarget.querySelectorAll("label");
 
-        for (let i = 0; i < labels.length; i++) {
-            currentSupportData.push(values[i].value);
+        inputSelects.push(...tempInputSelects);
+        labels.push(...tempLabels);
+    });
+    
+    if(currentSupportData.length !== inputSelects.length) {
+        console.log("Data Number Error.");
+        return;
+    }
 
-            if(!toggleSupportDataLabelFilled) {
-                toggleSupportDataLabel.push(labels[i].innerHTML);
+    for (let i = 0; i < currentSupportData.length; i++) {
+        if(getType(currentSupportData[i]) === "Array") {
+            switch(currentSupportData[i][0]) {
+                case "readonly":
+                    currentSupportData[i][1] = inputSelects[i].value;
+                    break;
+
+                case "equation":
+                    // 수식이 들어가는 경우 onblur함수 해제는 필요함. But 계산 방식 변경은 없기에. 리스트 값 변경은 불필요할 듯.
+                    break;
+
+                case "readonlyequation":
+                    // 수식이 들어가는 경우 onblur함수 해제는 필요함. But 계산 방식 변경은 없기에. 리스트 값 변경은 불필요할 듯.
+
+                    inputSelects[i].readOnly = true;
+                    // 수식이 들어가는 경우 set은 값 변경 뿐만아니라 onblur함수도 연결해야 함.
+
+                    let operators = currentSupportData[i][1].match(/[\+\*\/]/g);
+                    let values = currentSupportData[i][1].split(/[\+\*\/]/);
+                    let calculateArray = [];
+                    for (let i = 0; i < operators.length; i++) {
+                        calculateArray.push(values[i]);
+                        calculateArray.push(operators[i]);
+                    }
+                    calculateArray.push(values[values.length - 1]);
+
+                    for (let j = 0; j < calculateArray.length; j++) {
+                        // #으로 시작한 경우.
+                        if (/^#/.test(calculateArray[j])) {
+                            let target = document.querySelector(calculateArray[j]);
+
+                            target.onblur = function() {
+                                console.log("Deleted");
+                            };
+
+                            oneForBlur = target;
+                        }
+                    }
+                    
+                    break;
             }
         }
-    });
+        else {
+            currentSupportData[i] = inputSelects[i].value;
+        }
+
+        if(!toggleSupportDataLabelFilled) {
+            toggleSupportDataLabel.push(labels[i].innerHTML);
+        }
+    }
 
     toggleSupportDataLabelFilled = true;
-    
-    return currentSupportData;
 }
 
-function setTargeSupportData(supportContents, targetSupportData) {
+function setTargerData(supportContents, toggleSupportData, targetSupportNumber) {
+    let targetSupportData = toggleSupportData[targetSupportNumber];
+
     if(targetSupportData === undefined) {
         console.log("Data Empty.");
+        return;
     }
 
     const inputSelects = [];
@@ -147,102 +278,104 @@ function setTargeSupportData(supportContents, targetSupportData) {
     
     if(targetSupportData.length !== inputSelects.length) {
         console.log("Data Number Error.");
+        return;
     }
 
+    let oneForBlur = null;
     for (let i = 0; i < targetSupportData.length; i++) {
-        inputSelects[i].value = targetSupportData[i];
-
-        if (inputSelects[i].tagName === "SELECT") {
-            inputSelects[i].dispatchEvent(new Event("change"));
+        // console.log(inputSelects[i]);
+        if (getType(targetSupportData[i]) === "String") {
+            inputSelects[i].readOnly = false;
+            inputSelects[i].value = targetSupportData[i];
         }
-    }
-}
+        else if (getType(targetSupportData[i]) === "Array") {
+            switch(targetSupportData[i][0]) {
+                case "readonly":
+                    // console.log(inputSelects[i]);
+                    inputSelects[i].readOnly = true;
+                    inputSelects[i].value = targetSupportData[i][1];
+                    break;
 
+                case "equation":
+                    // 수식이 들어가는 경우 set은 값 변경 뿐만아니라 onblur함수도 연결해야 함.
+                    break;
 
+                case "readonlyequation":
+                    inputSelects[i].readOnly = true;
+                    // 수식이 들어가는 경우 set은 값 변경 뿐만아니라 onblur함수도 연결해야 함.
 
+                    let operators = targetSupportData[i][1].match(/[\+\*\/]/g);
+                    let values = targetSupportData[i][1].split(/[\+\*\/]/);
+                    let calculateArray = [];
+                    for (let i = 0; i < operators.length; i++) {
+                        calculateArray.push(values[i]);
+                        calculateArray.push(operators[i]);
+                    }
+                    calculateArray.push(values[values.length - 1]);
 
+                    for (let j = 0; j < calculateArray.length; j++) {
+                        // #으로 시작한 경우.
+                        if (/^#/.test(calculateArray[j])) {
+                            let target = document.querySelector(calculateArray[j]);
+                            
+                            target.onblur = function() {
+                                calculateFunction(inputSelects[i], calculateArray);
+                            };
 
-// toggleSpanDataLabel을 맨처음에 채워넣지 않았기에, Span 토글을 한 번 이상 클릭해야 지금 제대로 Json이 만들어짐.
-// 실행되는 시점에 Label 배열을 채우도록 개선해야함 !!
+                            oneForBlur = target;
+                        }
+                    }
 
-// Model 탭 Span 토글에 넣을 초기값
-let toggleSpanData = [
-    ["0.00000 m","7","0.00000 m","2.50000 m","-11.25000 m","-8.75000 m","-6.25000 m","-3.75000 m","-1.25000 m","1.25000 m","3.75000 m","6.25000 m","8.75000 m","11.25000 m","0.08000 m","0.24000 m","0.00000 m","18.00000 m","0.45000 m","8.245000 m","0.61000 m","8.24500 m","0.45000 m","Left Barrier","Road","Median Strip","Road","Right Barrier","1","0.40000 m","14.55000 m","14.55000 m","0.00000 m","0.00000 m","0.40000 m","0.70000 m","0.90000 m","1.50000 m","0.71000 m","1.30000 m","0.30000 m","0.30000 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m"], 
-    ["0.00000 m","7","0.00000 m","2.50000 m","-11.25000 m","-8.75000 m","-6.25000 m","-3.75000 m","-1.25000 m","1.25000 m","3.75000 m","6.25000 m","8.75000 m","11.25000 m","0.08000 m","0.24000 m","0.00000 m","18.00000 m","0.45000 m","8.245000 m","0.61000 m","8.24500 m","0.45000 m","Left Barrier","Road","Median Strip","Road","Right Barrier","1","0.40000 m","14.55000 m","14.55000 m","0.00000 m","0.00000 m","0.40000 m","0.70000 m","0.90000 m","1.50000 m","0.71000 m","1.30000 m","0.30000 m","0.30000 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m"], 
-    ["0.00000 m","7","0.00000 m","2.50000 m","-11.25000 m","-8.75000 m","-6.25000 m","-3.75000 m","-1.25000 m","1.25000 m","3.75000 m","6.25000 m","8.75000 m","11.25000 m","0.08000 m","0.24000 m","0.00000 m","18.00000 m","0.45000 m","8.245000 m","0.61000 m","8.24500 m","0.45000 m","Left Barrier","Road","Median Strip","Road","Right Barrier","1","0.40000 m","14.55000 m","14.55000 m","0.00000 m","0.00000 m","0.40000 m","0.70000 m","0.90000 m","1.50000 m","0.71000 m","1.30000 m","0.30000 m","0.30000 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m"], 
-    ["0.00000 m","7","0.00000 m","2.50000 m","-11.25000 m","-8.75000 m","-6.25000 m","-3.75000 m","-1.25000 m","1.25000 m","3.75000 m","6.25000 m","8.75000 m","11.25000 m","0.08000 m","0.24000 m","0.00000 m","18.00000 m","0.45000 m","8.245000 m","0.61000 m","8.24500 m","0.45000 m","Left Barrier","Road","Median Strip","Road","Right Barrier","1","0.40000 m","14.55000 m","14.55000 m","0.00000 m","0.00000 m","0.40000 m","0.70000 m","0.90000 m","1.50000 m","0.71000 m","1.30000 m","0.30000 m","0.30000 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m"], 
-    ["0.00000 m","7","0.00000 m","2.50000 m","-11.25000 m","-8.75000 m","-6.25000 m","-3.75000 m","-1.25000 m","1.25000 m","3.75000 m","6.25000 m","8.75000 m","11.25000 m","0.08000 m","0.24000 m","0.00000 m","18.00000 m","0.45000 m","8.245000 m","0.61000 m","8.24500 m","0.45000 m","Left Barrier","Road","Median Strip","Road","Right Barrier","1","0.40000 m","14.55000 m","14.55000 m","0.00000 m","0.00000 m","0.40000 m","0.70000 m","0.90000 m","1.50000 m","0.71000 m","1.30000 m","0.30000 m","0.30000 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m","0.17500 m"]
-];
-let toggleSpanDataLabel = [];
-let toggleSpanDataLabelFilled = false;
-
-// Model 탭 Span 토글 작동
-const spanToggles = document.querySelector("#spanToggles");
-const spanLabels = spanToggles.querySelectorAll("label");
-const spanContents = document.querySelector("#spanContents");
-spanLabels.forEach((spanLabel) => {
-    spanLabel.addEventListener("mousedown", (e) => {
-        let currentSpanNumber = parseInt(spanToggles.querySelector("input:checked").dataset.value);
-        toggleSpanData[currentSpanNumber] = getSpanData(spanContents);
-    
-        let targetSpanNumber = parseInt(document.querySelector("#" + spanLabel.getAttribute("for")).dataset.value);
-        setTargetSpanData(spanContents, toggleSpanData[targetSpanNumber]);
-    });
-});
-let defaultSpanNumber = parseInt(spanToggles.querySelector("input:checked").dataset.value);
-setTargetSpanData(spanContents, toggleSpanData[defaultSpanNumber]);
-
-function getSpanData(spanContents) {
-    let currentSpanData = [];
-
-    const dataTargets = spanContents.querySelectorAll(".dataTarget");
-    dataTargets.forEach((dataTarget) => {
-        const labels = dataTarget.querySelectorAll("label");
-        const values = dataTarget.querySelectorAll("input, select");
-        if (labels.length !== values.length) {
-            console.log("Label and value numbers different.");
-            return;
-        }
-
-        for (let i = 0; i < labels.length; i++) {
-            currentSpanData.push(values[i].value);
-
-            if(!toggleSpanDataLabelFilled) {
-                toggleSpanDataLabel.push(labels[i].innerHTML);
+                    break;
             }
         }
-    });
-
-    toggleSpanDataLabelFilled = true;
-
-    return currentSpanData;
-}
-function setTargetSpanData(spanContents, targetSpanData) {
-    if(targetSpanData === undefined) {
-        console.log("Data Empty.");
-    }
-
-    const inputSelects = [];
-
-    const dataTargets = spanContents.querySelectorAll(".dataTarget");
-    dataTargets.forEach((dataTarget) => {
-        const tempInputSelectList = dataTarget.querySelectorAll("input, select");
-
-        inputSelects.push(...tempInputSelectList);
-    });
-    
-    if(targetSpanData.length !== inputSelects.length) {
-        console.log("Data Number Error.");
-    }
-
-    for (let i = 0; i < targetSpanData.length; i++) {
-        inputSelects[i].value = targetSpanData[i];
 
         if (inputSelects[i].tagName === "SELECT") {
             inputSelects[i].dispatchEvent(new Event("change"));
         }
     }
+    if (oneForBlur !== null) {
+        oneForBlur.dispatchEvent(new Event("blur"));
+    }
 }
+
+function calculateFunction(dataTarget, calculateArray) {
+    console.log(33333);
+    let equation = "";
+
+    for (let i = 0; i < calculateArray.length; i++) {
+        // #으로 시작한 경우.
+        if (/^#/.test(calculateArray[i])) {
+            let target = document.querySelector(calculateArray[i]);
+            equation += meterToFloat(target.value);
+
+            calculateArray[i].onblur;
+        }
+
+        // 숫자로 시작한 경우.
+        else if (/^\d/.test(calculateArray[i])) {
+            equation += parseFloat(calculateArray[i]);
+        }
+
+        // 문자로 시작한 경우.
+        else if (/^\w/.test(calculateArray[i])) {
+            equation += meterToFloat(eval(calculateArray[i]));
+        }
+
+        else if (/[\+\*\/]/.test(calculateArray[i])) {
+            equation += calculateArray[i];
+        }
+
+        else {
+            console.log("Wrong initial value.");
+            return;
+        }
+    }
+
+    dataTarget.value = floatToMeter(eval(equation));
+}
+
+
 
 // girderNumber 콤보박스 작동
 const girderNumber = document.querySelector("#model-girderNumber");
@@ -343,15 +476,15 @@ bearingHeightApply.addEventListener("click", () => {
 
 // Title 클릭하면 접히는 효과
 const titles = document.querySelectorAll(".title");
-let titesStatus = {};
+let titlesStatus = {};
 titles.forEach((title) => {
-    titesStatus[title.querySelector(".title_text").innerHTML] = true;
+    titlesStatus[title.querySelector(".title_text").innerHTML] = true;
 
     title.addEventListener("click", (event) => {
         let target = title;
 
-        if(titesStatus[target.querySelector(".title_text").innerHTML]) {
-            titesStatus[target.querySelector(".title_text").innerHTML] = false;
+        if(titlesStatus[target.querySelector(".title_text").innerHTML]) {
+            titlesStatus[target.querySelector(".title_text").innerHTML] = false;
 
             for(let i = 0; i < title.parentElement.children.length - 1; i++) {
                 target = target.nextElementSibling;
@@ -361,7 +494,7 @@ titles.forEach((title) => {
         }
 
         else {
-            titesStatus[target.querySelector(".title_text").innerHTML] = true;
+            titlesStatus[target.querySelector(".title_text").innerHTML] = true;
 
             for(let i = 0; i < title.parentElement.children.length - 1; i++) {
                 target = target.nextElementSibling;
@@ -375,6 +508,8 @@ titles.forEach((title) => {
 const createAssemblyUnit = document.querySelector("#footer-createAssemblyUnit");
 createAssemblyUnit.addEventListener("click", collectData);
 function collectData() {
+    console.log(toggleSpanDataLabel);
+
     let currentSpanNumber = parseInt(spanToggles.querySelector("input:checked").dataset.value);
     toggleSpanData[currentSpanNumber] = getSpanData(spanContents);
 
@@ -403,61 +538,14 @@ function collectData() {
     // window.chrome.webview.postMessage(JSON.stringify(result));
 }
 
-// console.log(document.querySelector("#model-girderNumber").value);
-// document.querySelector("#model-girderNumber").value = "5";
-// console.log(document.querySelector("#model-girderNumber").value);
-// // select 의 value 를 변경하여서 값 변경이 가능.
-// // 그런데, 이벤트가 연결되어 있는 경우에는 change 이벤트를 강제로 trigger 해줘야 함.
-
-// console.log(document.querySelector("#model-girderNumber").tagName);
-// // tagName 값을 사용해서 해당 DOM 의 태그가 무엇인지 알 수 있음.
-// // 이것을 이용해서 해당 태그가 SELECT 인 경우에는 change 이벤트 trigger 이런 식으로 가면 될 듯.
-
-// let dataaaaa = [];
-// console.log(dataaaaa);
-// dataaaaa[3] = 5;
-// console.log(dataaaaa);
-// // 자바스크립트 문번 진짜 ㄹㅇ ㅈㄴ 스마트하다... ㄷㄷ 리스트 가운데에 값을
-// // 그냥 넣었을 때 문제 없이 넣어주네. [빈 X 3, 5] 이렇게 주네 ㄷㄷ
-
-// let numnum = 10;
-// console.log(numnum.length);
-// console.log(numnum.length > 0);
-// console.log(!numnum.length > 0);
-// // 숫자의 경우 length 를 붙이면 undefined 가 리턴되고, undefined 는 숫자와
-// // 비교 되었을 때 false 가 나오네.
-
-// dataaaaa.push(...[1, 2]);
-// console.log(dataaaaa);
-// let newnew = dataaaaa.concat([10, 20]);
-// console.log(dataaaaa);
-// console.log(newnew);
-// // concat 함수도 가능은 한데, 얘는 합쳐진 놈이 리턴되는 방식이라서 불편하네.
-// // ... 연산자를 사용해서 리스트의 각 항목들을 push 한다는 방식으로 가는
-// // 편이 훨씬 좋을 것 같음.
-
-// const values = [];
-// // console.log(values);
-// const dataTargets = document.querySelectorAll(".dataTarget");
-// dataTargets.forEach((dataTarget) => {
-//     const tempInputSelectList = dataTarget.querySelectorAll("input, select");
-//     // console.log(tempInputSelectList);
-//     values.push(...tempInputSelectList);
-// });
-// // console.log(values);
-// // 일반 Array 가 아니라 NodeList의 경우에도 ... 연산자를 사용해서 모든 구성
-// // 요소 각각을 선택할 수도 있음.
-
-// // if(labels[i].parentElement.style.display === "none") {
-// //     continue;
-// // }
-
-// // parentElement 의 display === "none" 이면  for 문 넘어가기.
-
 function meterToFloat(strNumber) {
     return parseFloat(strNumber.replace(" m", ""));
 }
 
 function floatToMeter(number) {
     return number.toFixed(5) + " m";
+}
+
+function getType(target){
+    return Object.prototype.toString.call(target).slice(8,-1);
 }

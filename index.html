@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <script src="./src/index.js" defer></script>
+    <script defer src="./src/index.js"></script>
     <link rel="stylesheet" href="./src/style.css">
     <title>Document</title>
 </head>
+<!-- contextmenu="return false" ondragstart="return false" onselectstart="return false" -->
 <body>
     <nav class="tabs depth1">
         <input type="radio" name="tabs-depth1" id="general-tab" data-tab-target="#general-content" checked>
@@ -62,11 +63,11 @@
                     <li class="eachLine">
                         <label for="layout-numberOfSpans">Number of Spans</label>
                         <select name="numSpans" id="layout-numberOfSpans" class="numberOfSpansFunction1 numberOfSpansFunction2">
-                            <option label="1" value="1" selected></option>
+                            <option label="1" value="1" ></option>
                             <option label="2" value="2"></option>
                             <option label="3" value="3"></option>
                             <option label="4" value="4"></option>
-                            <option label="5" value="5"></option>
+                            <option label="5" value="5"selected></option>
                         </select>
                     </li>
                 </ul>
@@ -91,9 +92,9 @@
         <div class="supports content">
             <section class="notitle">
                 <div class="toggle_btn" id="supportToggles">
-                    <input type="radio" name="supportToggles" id="layout-support1toggle" data-value="0" checked>
+                    <input type="radio" name="supportToggles" id="layout-support1toggle" data-value="0" >
                     <label for="layout-support1toggle">Support 1</label>
-                    <input type="radio" name="supportToggles" id="layout-support2toggle" data-value="1">
+                    <input type="radio" name="supportToggles" id="layout-support2toggle" data-value="1"checked>
                     <label for="layout-support2toggle">Support 2</label>
                     <input type="radio" name="supportToggles" id="layout-support3toggle" data-value="2">
                     <label for="layout-support3toggle">Support 3</label>
@@ -128,8 +129,8 @@
                 <div class="items dataTarget">
                     <ul class="half left">
                         <li class="eachLine">
-                            <label for="layout-Support1SupportName">Support Name</label>
-                            <select id="layout-Support1SupportName">
+                            <label for="layout-SupportName">Support Name</label>
+                            <select id="layout-SupportName">
                                 <option label="A1" value="A1" selected></option>
                                 <option label="P1" value="P1"></option>
                                 <option label="P2" value="P2"></option>
@@ -146,39 +147,45 @@
                 <div class="items dataTarget">
                     <ul class="half left">
                         <li class="eachLine">
-                            <label for="layout-Support1SpanLength">Span Length</label>
-                            <input type="text" class="spanLength" id="layout-Support1SpanLength" value="0.00000 m" readonly>
+                            <label for="layout-SpanLength">Span Length</label>
+                            <input type="text" class="spanLength" id="layout-SpanLength" value="0.00000 m">
                         </li>
                         <li class="eachLine">
-                            <label for="layout-Support1GirderLength">Girder Length</label>
-                            <input type="text" id="layout-Support1GirderLength" value="0.00000 m" readonly>
+                            <label for="layout-GirderLength">Girder Length</label>
+                            <input type="text" class="mUnit" id="layout-GirderLength" value="29.90000 m">
                         </li>
                         <li class="eachLine">
-                            <label for="layout-Support1ExpansionLength">Expansion Length</label>
-                            <input type="text" class="mUnit" id="layout-Support1ExpansionLength" value="0.10000 m">
+                            <label for="layout-ExpansionLength">Expansion Length</label>
+                            <input type="text" class="mUnit" id="layout-ExpansionLength" value="0.10000 m">
                         </li>
                         <li class="eachLine">
-                            <label for="layout-Support1SlabProtrusionLength">Slab Protrusion Length</label>
-                            <input type="text" class="mUnit" id="layout-Support1SlabProtrusionLength" value="0.05000 m">
+                            <label for="layout-SlabProtrusionLength">Slab Protrusion Length</label>
+                            <input type="text" class="mUnit" id="layout-SlabProtrusionLength" value="0.05000 m">
                         </li>
                     </ul>
 
                     <ul class="half right">
                         <li class="eachLine">
-                            <label for="layout-Support1GirderConnection">Girder Connection</label>
-                            <input type="text" id="layout-Support1GirderConnection" value="Start" readonly>
+                            <label for="layout-GirderConnection">Girder Connection</label>
+                            <!-- <select name="girder_connection" id="layout-girderConnection">
+                                <option label="Start" value="start" selected></option>
+                                <option label="2 Shoe" value="2 shoe"></option>
+                                <option label="3 Shoe" value="3 shoe"></option>
+                                <option label="End" value="end"></option>
+                            </select> -->
+                            <input type="text" id="layout-GirderConnection" value="Start">
                         </li>
                         <li class="eachLine">
-                            <label for="layout-Support1BearingLocationB1">Bearing Location(B1)</label>
-                            <input type="text" class="mUnit" id="layout-Support1BearingLocationB1" value="0.40000 m">
+                            <label for="layout-BearingLocationB1">Bearing Location(B1)</label>
+                            <input type="text" class="mUnit" id="layout-BearingLocationB1" value="0.40000 m">
                         </li>
                         <li class="eachLine">
-                            <label for="layout-Support1BearingLocationB2">Bearing Location(B2)</label>
-                            <input type="text" id="layout-Support1BearingLocationB2" value="0.00000 m" readonly>
+                            <label for="layout-BearingLocationB2">Bearing Location(B2)</label>
+                            <input type="text" class="mUnit" id="layout-BearingLocationB2" value="0.00000 m">
                         </li>
                         <li class="eachLine">
-                            <label for="layout-Support1HeightSpacing">Height Spacing</label>
-                            <input type="text" class="mUnit" id="layout-Support1HeightSpacing" value="0.50000 m">
+                            <label for="layout-HeightSpacing">Height Spacing</label>
+                            <input type="text" class="mUnit" id="layout-HeightSpacing" value="0.50000 m">
                         </li>
                     </ul>
                 </div>
@@ -644,22 +651,19 @@
 
     <!-- Footer 시작 -->
     <footer>
-        <section class="footer">
-            <div class="items">
-                <ul>
-                    <li>
-                        <input type="checkbox" id="footer-chk" role="switch" checked>
-                        <label for="footer-chk">Run Modify Mode after Creation</label>
-                    </li>
-                </ul>
-                <ul>
-                    <li>
-                        <button type="submit" id="footer-createAssemblyUnit" name="create_assembly_unit">Create Assembly Unit</button>
-                    </li>
-                </ul>
-                
-            </div>
-        </section>
+        <div class="items space-between">
+            <ul class="left">
+                <li class="eachLine">
+                    <input type="checkbox" id="footer-chk" role="switch" checked>
+                    <label for="footer-chk">Run Modify Mode after Creation</label>
+                </li>
+            </ul>
+            <ul class="right">
+                <li class="eachLine">
+                    <button type="submit" id="footer-createAssemblyUnit" name="create_assembly_unit">Create Assembly Unit</button>
+                </li>
+            </ul>
+        </div>
     </footer>
     <!-- 여기까지 Footer -->
 </body>
