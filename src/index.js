@@ -119,59 +119,118 @@ numberOfSpansFunction2.dispatchEvent(new Event("change"));
 
     그런데 문제가 set을 부른 후 get을 부르다 보니 함수를 해제시켜 버리네 ㅠㅠㅠㅠㅠ
     처음부터 Label을 들고 있게끔 만들어야 해 !!
+
+    일단 깔끔하게 누를 경우에는 잘 작동하고 있네.
+    입력하던 중에 Number of Spans 값을 바꿔버릴 경우에 문제가 발생하고 있음.
+    이 부분을 해결합시다 !!
+
+    해결해야하는 문제.
+    1. 없는 옵션을 선택했을 때 Number of Spans 값을 바꾸면 체크해제 되어야 함.
+    2. 이 체크 해제 때문에 문제가 많음.
+
+    Create 버튼 이벤트는 체크 해제 없이도 일단 구현은 가능하니까.
+    내일 하도록 합시다.
 */
 
 
 
 
 // Layout 탭 Support 토글에 넣을 초기값
-let toggleSupportData = [
-    ["A1", ["readonly", "0.00000 m"], ["readonly", "0.00000 m"], "0.10000 m", "0.05000 m", "Start", "0.40000 m", ["readonly", "0.00000 m"], "0.50000 m"],
-    ["A1", ["readonlyequation", "toggleSupportData[0][3]+toggleSupportData[0][4]+#layout-GirderLength+0.5*#layout-SlabProtrusionLength"], "29.90000 m", ["readonly", "0.00000 m"], "0.10000 m", "Start", "0.40000 m", "0.40000 m", "0.50000 m"],
-    ["A1", ["readonlyequation", "0.5*toggleSupportData[1][4]+#layout-GirderLength+0.5*#layout-SlabProtrusionLength"], "29.90000 m", ["readonly", "0.00000 m"], "0.10000 m", "Start", "0.40000 m", "0.00000 m", "0.50000 m"],
-    ["A1", ["readonlyequation", "0.5*toggleSupportData[2][4]+#layout-GirderLength+0.5*#layout-SlabProtrusionLength", ""], "29.90000 m", ["readonly", "0.00000 m"], "0.10000 m", "Start", "0.40000 m", "0.00000 m", "0.50000 m"],
-    ["A1", ["readonlyequation", "0.5*toggleSupportData[3][4]+#layout-GirderLength+0.5*#layout-SlabProtrusionLength", ""], "29.90000 m", ["readonly", "0.00000 m"], "0.10000 m", "Start", "0.40000 m", "0.00000 m", "0.50000 m"],
-    ["A1", ["readonlyequation", "0.5*toggleSupportData[4][4]+#layout-GirderLength+#layout-ExpansionLength+#layout-SlabProtrusionLength", ""], "29.90000 m", "0.10000 m", "0.05000 m", "End", "0.40000 m", ["readonly", "0.00000 m"], "0.50000 m"]
+let toggleSupportData = {
+    "1": [
+        ["A1", ["readonly", "0.00000 m"], ["readonly", "0.00000 m"], "0.10000 m", "0.05000 m", "Start", "0.40000 m", ["readonly", "0.00000 m"], "0.50000 m"],
+        ["A1", ["readonlyequation", "toggleSupportData['1'][0][3]+toggleSupportData['1'][0][4]+#layout-GirderLength+#layout-ExpansionLength+#layout-SlabProtrusionLength", "0.00000 m"], "29.90000 m", "0.10000 m", "0.05000 m", "End", "0.40000 m", ["readonly", "0.00000 m"], "0.50000 m"]
+    ], 
+    "2": [
+        ["A1", ["readonly", "0.00000 m"], ["readonly", "0.00000 m"], "0.10000 m", "0.05000 m", "Start", "0.40000 m", ["readonly", "0.00000 m"], "0.50000 m"],
+        ["A1", ["readonlyequation", "toggleSupportData['2'][0][3]+toggleSupportData['2'][0][4]+#layout-GirderLength+0.5*#layout-SlabProtrusionLength", "0.00000 m"], "29.90000 m", ["readonly", "0.00000 m"], "0.10000 m", "Start", "0.40000 m", "0.40000 m", "0.50000 m"],
+        ["A1", ["readonlyequation", "0.5*toggleSupportData['2'][1][4]+#layout-GirderLength+#layout-ExpansionLength+#layout-SlabProtrusionLength", "0.00000 m"], "29.90000 m", "0.10000 m", "0.05000 m", "End", "0.40000 m", ["readonly", "0.00000 m"], "0.50000 m"]
+    ], 
+    "3": [
+        ["A1", ["readonly", "0.00000 m"], ["readonly", "0.00000 m"], "0.10000 m", "0.05000 m", "Start", "0.40000 m", ["readonly", "0.00000 m"], "0.50000 m"],
+        ["A1", ["readonlyequation", "toggleSupportData['3'][0][3]+toggleSupportData['3'][0][4]+#layout-GirderLength+0.5*#layout-SlabProtrusionLength", "0.00000 m"], "29.90000 m", ["readonly", "0.00000 m"], "0.10000 m", "Start", "0.40000 m", "0.40000 m", "0.50000 m"],
+        ["A1", ["readonlyequation", "0.5*toggleSupportData['3'][1][4]+#layout-GirderLength+0.5*#layout-SlabProtrusionLength", "0.00000 m"], "29.90000 m", ["readonly", "0.00000 m"], "0.10000 m", "Start", "0.40000 m", "0.00000 m", "0.50000 m"],
+        ["A1", ["readonlyequation", "0.5*toggleSupportData['3'][2][4]+#layout-GirderLength+#layout-ExpansionLength+#layout-SlabProtrusionLength", "0.00000 m"], "29.90000 m", "0.10000 m", "0.05000 m", "End", "0.40000 m", ["readonly", "0.00000 m"], "0.50000 m"]
+    ], 
+    "4": [
+        ["A1", ["readonly", "0.00000 m"], ["readonly", "0.00000 m"], "0.10000 m", "0.05000 m", "Start", "0.40000 m", ["readonly", "0.00000 m"], "0.50000 m"],
+        ["A1", ["readonlyequation", "toggleSupportData['4'][0][3]+toggleSupportData['4'][0][4]+#layout-GirderLength+0.5*#layout-SlabProtrusionLength", "0.00000 m"], "29.90000 m", ["readonly", "0.00000 m"], "0.10000 m", "Start", "0.40000 m", "0.40000 m", "0.50000 m"],
+        ["A1", ["readonlyequation", "0.5*toggleSupportData['4'][1][4]+#layout-GirderLength+0.5*#layout-SlabProtrusionLength", "0.00000 m"], "29.90000 m", ["readonly", "0.00000 m"], "0.10000 m", "Start", "0.40000 m", "0.00000 m", "0.50000 m"],
+        ["A1", ["readonlyequation", "0.5*toggleSupportData['4'][2][4]+#layout-GirderLength+0.5*#layout-SlabProtrusionLength", "0.00000 m"], "29.90000 m", ["readonly", "0.00000 m"], "0.10000 m", "Start", "0.40000 m", "0.00000 m", "0.50000 m"],
+        ["A1", ["readonlyequation", "0.5*toggleSupportData['4'][3][4]+#layout-GirderLength+#layout-ExpansionLength+#layout-SlabProtrusionLength", "0.00000 m"], "29.90000 m", "0.10000 m", "0.05000 m", "End", "0.40000 m", ["readonly", "0.00000 m"], "0.50000 m"]
+    ], 
+    "5": [
+        ["A1", ["readonly", "0.00000 m"], ["readonly", "0.00000 m"], "0.10000 m", "0.05000 m", "Start", "0.40000 m", ["readonly", "0.00000 m"], "0.50000 m"],
+        ["A1", ["readonlyequation", "toggleSupportData['5'][0][3]+toggleSupportData['5'][0][4]+#layout-GirderLength+0.5*#layout-SlabProtrusionLength", "0.00000 m"], "29.90000 m", ["readonly", "0.00000 m"], "0.10000 m", "Start", "0.40000 m", "0.40000 m", "0.50000 m"],
+        ["A1", ["readonlyequation", "0.5*toggleSupportData['5'][1][4]+#layout-GirderLength+0.5*#layout-SlabProtrusionLength", "0.00000 m"], "29.90000 m", ["readonly", "0.00000 m"], "0.10000 m", "Start", "0.40000 m", "0.00000 m", "0.50000 m"],
+        ["A1", ["readonlyequation", "0.5*toggleSupportData['5'][2][4]+#layout-GirderLength+0.5*#layout-SlabProtrusionLength", "0.00000 m"], "29.90000 m", ["readonly", "0.00000 m"], "0.10000 m", "Start", "0.40000 m", "0.00000 m", "0.50000 m"],
+        ["A1", ["readonlyequation", "0.5*toggleSupportData['5'][3][4]+#layout-GirderLength+0.5*#layout-SlabProtrusionLength", "0.00000 m"], "29.90000 m", ["readonly", "0.00000 m"], "0.10000 m", "Start", "0.40000 m", "0.00000 m", "0.50000 m"],
+        ["A1", ["readonlyequation", "0.5*toggleSupportData['5'][4][4]+#layout-GirderLength+#layout-ExpansionLength+#layout-SlabProtrusionLength", "0.00000 m"], "29.90000 m", "0.10000 m", "0.05000 m", "End", "0.40000 m", ["readonly", "0.00000 m"], "0.50000 m"]
+    ]
+};
+let toggleSupportDataLabel = ["Support Name", "Span Length", "Girder Length", "Expansion Length", "Slab Protrusion Length", "Girder Connection", "Bearing Location(B1)", "Bearing Location(B2)", "Height Spacing"];
+
+// Model 탭 Span 토글에 넣을 초기값
+let toggleSpanData = [
+    ["0.00000 m", "7", "0.00000 m", "2.50000 m", "-11.25000 m", "-8.75000 m", "-6.25000 m", "-3.75000 m", "-1.25000 m", "1.25000 m", "3.75000 m", "6.25000 m", "8.75000 m", "11.25000 m", "0.08000 m", "0.24000 m", "0.00000 m", "18.00000 m", "0.45000 m", ["readonly", "8.24500 m"], "0.61000 m", ["readonly", "8.24500 m"], "0.45000 m", "Left Barrier", "Road", "Median Strip", "Road", "Right Barrier", "1", "0.40000 m", "14.55000 m", "14.55000 m", "0.00000 m", "0.00000 m", "0.40000 m", "0.70000 m", "0.90000 m", "1.50000 m", "0.71000 m", "1.30000 m", "0.30000 m", "0.30000 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m"],  
+    ["0.00000 m", "7", "0.00000 m", "2.50000 m", "-11.25000 m", "-8.75000 m", "-6.25000 m", "-3.75000 m", "-1.25000 m", "1.25000 m", "3.75000 m", "6.25000 m", "8.75000 m", "11.25000 m", "0.08000 m", "0.24000 m", "0.00000 m", "18.00000 m", "0.45000 m", ["readonly", "8.24500 m"], "0.61000 m", ["readonly", "8.24500 m"], "0.45000 m", "Left Barrier", "Road", "Median Strip", "Road", "Right Barrier", "1", "0.40000 m", "14.55000 m", "14.55000 m", "0.00000 m", "0.00000 m", "0.40000 m", "0.70000 m", "0.90000 m", "1.50000 m", "0.71000 m", "1.30000 m", "0.30000 m", "0.30000 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m"],  
+    ["0.00000 m", "7", "0.00000 m", "2.50000 m", "-11.25000 m", "-8.75000 m", "-6.25000 m", "-3.75000 m", "-1.25000 m", "1.25000 m", "3.75000 m", "6.25000 m", "8.75000 m", "11.25000 m", "0.08000 m", "0.24000 m", "0.00000 m", "18.00000 m", "0.45000 m", ["readonly", "8.24500 m"], "0.61000 m", ["readonly", "8.24500 m"], "0.45000 m", "Left Barrier", "Road", "Median Strip", "Road", "Right Barrier", "1", "0.40000 m", "14.55000 m", "14.55000 m", "0.00000 m", "0.00000 m", "0.40000 m", "0.70000 m", "0.90000 m", "1.50000 m", "0.71000 m", "1.30000 m", "0.30000 m", "0.30000 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m"],  
+    ["0.00000 m", "7", "0.00000 m", "2.50000 m", "-11.25000 m", "-8.75000 m", "-6.25000 m", "-3.75000 m", "-1.25000 m", "1.25000 m", "3.75000 m", "6.25000 m", "8.75000 m", "11.25000 m", "0.08000 m", "0.24000 m", "0.00000 m", "18.00000 m", "0.45000 m", ["readonly", "8.24500 m"], "0.61000 m", ["readonly", "8.24500 m"], "0.45000 m", "Left Barrier", "Road", "Median Strip", "Road", "Right Barrier", "1", "0.40000 m", "14.55000 m", "14.55000 m", "0.00000 m", "0.00000 m", "0.40000 m", "0.70000 m", "0.90000 m", "1.50000 m", "0.71000 m", "1.30000 m", "0.30000 m", "0.30000 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m"],  
+    ["0.00000 m", "7", "0.00000 m", "2.50000 m", "-11.25000 m", "-8.75000 m", "-6.25000 m", "-3.75000 m", "-1.25000 m", "1.25000 m", "3.75000 m", "6.25000 m", "8.75000 m", "11.25000 m", "0.08000 m", "0.24000 m", "0.00000 m", "18.00000 m", "0.45000 m", ["readonly", "8.24500 m"], "0.61000 m", ["readonly", "8.24500 m"], "0.45000 m", "Left Barrier", "Road", "Median Strip", "Road", "Right Barrier", "1", "0.40000 m", "14.55000 m", "14.55000 m", "0.00000 m", "0.00000 m", "0.40000 m", "0.70000 m", "0.90000 m", "1.50000 m", "0.71000 m", "1.30000 m", "0.30000 m", "0.30000 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m"]
 ];
-let toggleSupportDataLabel = [];
-let toggleSupportDataLabelFilled = false;
+let toggleSpanDataLabel = ["Girder Alignment", "Girder Number", "Layout Offset", "Girder Spacing", "Girder-1", "Girder-2", "Girder-3", "Girder-4", "Girder-5", "Girder-6", "Girder-7", "Girder-8", "Girder-9", "Girder-10", "Pave.Thickness", "Slab Thickness", "Vertical Sag", "Desk Width", "Spacing(L1)", "Spacing(L2)", "Spacing(L3)", "Spacing(L4)", "Spacing(L5)", "Type(L1)", "Type(L2)", "Type(L3)", "Type(L4)", "Type(L5)", "Mid.Cross Beam", "Spacing(BS)", "Spacing(CR1)", "Spacing(CR2)", "Spacing(CR3)", "Spacing(CR4)", "Spacing(BE)", "Girder(a)", "Girder(b)", "Girder(c)", "End Cross Beam(a)", "Middle Cross Beam(a)", "End Cross Beam(b)", "Middle Cross Beam(b)", "Girder-1(Start)", "Girder-2(Start)", "Girder-3(Start)", "Girder-4(Start)", "Girder-5(Start)", "Girder-6(Start)", "Girder-7(Start)", "Girder-8(Start)", "Girder-9(Start)", "Girder-10(Start)", "Girder-1(End)", "Girder-2(End)", "Girder-3(End)", "Girder-4(End)", "Girder-5(End)", "Girder-6(End)", "Girder-7(End)", "Girder-8(End)", "Girder-9(End)", "Girder-10(End)"];
+
+
+
+
+
+const numberOfSpans = document.querySelector("#layout-numberOfSpans");
+let numberOfSpansValue = numberOfSpans.value;
+numberOfSpans.addEventListener("focus", () => {
+    numberOfSpansValue = numberOfSpans.value;
+    console.log(numberOfSpansValue);
+});
+numberOfSpans.addEventListener("change", () => {
+    let currentSupportNumber = parseInt(supportToggles.querySelector("input:checked").dataset.value);
+    getCurrentData(supportContents, toggleSupportData[numberOfSpansValue], currentSupportNumber);
+
+    if(supportToggles.querySelector("input:checked").nextElementSibling.style.display === "none") {
+        document.querySelector("#layout-support1toggle").checked = true;
+    }
+
+    numberOfSpansValue = numberOfSpans.value;
+    console.log(numberOfSpansValue);
+    let targetSupportNumber = parseInt(supportToggles.querySelector("input:checked").dataset.value);
+    console.log(targetSupportNumber);
+    setTargerData(supportContents, toggleSupportData[numberOfSpansValue], targetSupportNumber);
+});
 
 // Layout 탭 Support 토글 작동
 const supportToggles = document.querySelector("#supportToggles");
 const supportLabels = supportToggles.querySelectorAll("label");
 const supportContents = document.querySelector("#supportContents");
 supportLabels.forEach((supportLabel) => {
-    supportLabel.addEventListener("mousedown", (e) => {
+    supportLabel.addEventListener("click", (e) => {
         let currentSupportNumber = parseInt(supportToggles.querySelector("input:checked").dataset.value);
-        getCurrentData(supportContents, toggleSupportData, currentSupportNumber);
+        
+        numberOfSpansValue = numberOfSpans.value;
+        getCurrentData(supportContents, toggleSupportData[numberOfSpansValue], currentSupportNumber);
     
         let targetSupportNumber = parseInt(document.querySelector("#" + supportLabel.getAttribute("for")).dataset.value);
-        setTargerData(supportContents, toggleSupportData, targetSupportNumber);
+        setTargerData(supportContents, toggleSupportData[numberOfSpansValue], targetSupportNumber);
     });
 });
 let defaultSupportNumber = parseInt(supportToggles.querySelector("input:checked").dataset.value);
-setTargerData(supportContents, toggleSupportData, defaultSupportNumber);
-getCurrentData(supportContents, toggleSupportData, defaultSupportNumber);
 
-
-
-// Model 탭 Span 토글에 넣을 초기값
-let toggleSpanData = [
-    ["0.11111 m", "7", "0.00000 m", "2.50000 m", "-11.25000 m", "-8.75000 m", "-6.25000 m", "-3.75000 m", "-1.25000 m", "1.25000 m", "3.75000 m", "6.25000 m", "8.75000 m", "11.25000 m", "0.08000 m", "0.24000 m", "0.00000 m", "18.00000 m", "0.45000 m", ["readonly", "8.24500 m"], "0.61000 m", ["readonly", "8.24500 m"], "0.45000 m", "Left Barrier", "Road", "Median Strip", "Road", "Right Barrier", "1", "0.40000 m", "14.55000 m", "14.55000 m", "0.00000 m", "0.00000 m", "0.40000 m", "0.70000 m", "0.90000 m", "1.50000 m", "0.71000 m", "1.30000 m", "0.30000 m", "0.30000 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m"],  
-    ["0.22222 m", "7", "0.00000 m", "2.50000 m", "-11.25000 m", "-8.75000 m", "-6.25000 m", "-3.75000 m", "-1.25000 m", "1.25000 m", "3.75000 m", "6.25000 m", "8.75000 m", "11.25000 m", "0.08000 m", "0.24000 m", "0.00000 m", "18.00000 m", "0.45000 m", ["readonly", "8.24500 m"], "0.61000 m", ["readonly", "8.24500 m"], "0.45000 m", "Left Barrier", "Road", "Median Strip", "Road", "Right Barrier", "1", "0.40000 m", "14.55000 m", "14.55000 m", "0.00000 m", "0.00000 m", "0.40000 m", "0.70000 m", "0.90000 m", "1.50000 m", "0.71000 m", "1.30000 m", "0.30000 m", "0.30000 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m"],  
-    ["0.33333 m", "7", "0.00000 m", "2.50000 m", "-11.25000 m", "-8.75000 m", "-6.25000 m", "-3.75000 m", "-1.25000 m", "1.25000 m", "3.75000 m", "6.25000 m", "8.75000 m", "11.25000 m", "0.08000 m", "0.24000 m", "0.00000 m", "18.00000 m", "0.45000 m", ["readonly", "8.24500 m"], "0.61000 m", ["readonly", "8.24500 m"], "0.45000 m", "Left Barrier", "Road", "Median Strip", "Road", "Right Barrier", "1", "0.40000 m", "14.55000 m", "14.55000 m", "0.00000 m", "0.00000 m", "0.40000 m", "0.70000 m", "0.90000 m", "1.50000 m", "0.71000 m", "1.30000 m", "0.30000 m", "0.30000 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m"],  
-    ["0.44444 m", "7", "0.00000 m", "2.50000 m", "-11.25000 m", "-8.75000 m", "-6.25000 m", "-3.75000 m", "-1.25000 m", "1.25000 m", "3.75000 m", "6.25000 m", "8.75000 m", "11.25000 m", "0.08000 m", "0.24000 m", "0.00000 m", "18.00000 m", "0.45000 m", ["readonly", "8.24500 m"], "0.61000 m", ["readonly", "8.24500 m"], "0.45000 m", "Left Barrier", "Road", "Median Strip", "Road", "Right Barrier", "1", "0.40000 m", "14.55000 m", "14.55000 m", "0.00000 m", "0.00000 m", "0.40000 m", "0.70000 m", "0.90000 m", "1.50000 m", "0.71000 m", "1.30000 m", "0.30000 m", "0.30000 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m"],  
-    ["0.55555 m", "7", "0.00000 m", "2.50000 m", "-11.25000 m", "-8.75000 m", "-6.25000 m", "-3.75000 m", "-1.25000 m", "1.25000 m", "3.75000 m", "6.25000 m", "8.75000 m", "11.25000 m", "0.08000 m", "0.24000 m", "0.00000 m", "18.00000 m", "0.45000 m", ["readonly", "8.24500 m"], "0.61000 m", ["readonly", "8.24500 m"], "0.45000 m", "Left Barrier", "Road", "Median Strip", "Road", "Right Barrier", "1", "0.40000 m", "14.55000 m", "14.55000 m", "0.00000 m", "0.00000 m", "0.40000 m", "0.70000 m", "0.90000 m", "1.50000 m", "0.71000 m", "1.30000 m", "0.30000 m", "0.30000 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m", "0.17500 m"]
-];
-let toggleSpanDataLabel = [];
-let toggleSpanDataLabelFilled = false;
+numberOfSpansValue = numberOfSpans.value;
+setTargerData(supportContents, toggleSupportData[numberOfSpansValue], defaultSupportNumber);
 
 // Model 탭 Span 토글 작동
 const spanToggles = document.querySelector("#spanToggles");
 const spanLabels = spanToggles.querySelectorAll("label");
 const spanContents = document.querySelector("#spanContents");
 spanLabels.forEach((spanLabel) => {
-    spanLabel.addEventListener("mousedown", (e) => {
+    spanLabel.addEventListener("click", (e) => {
         let currentSpanNumber = parseInt(spanToggles.querySelector("input:checked").dataset.value);
         getCurrentData(spanContents, toggleSpanData, currentSpanNumber);
     
@@ -181,17 +240,16 @@ spanLabels.forEach((spanLabel) => {
 });
 let defaultSpanNumber = parseInt(spanToggles.querySelector("input:checked").dataset.value);
 setTargerData(spanContents, toggleSpanData, defaultSpanNumber);
-getCurrentData(spanContents, toggleSpanData, defaultSpanNumber);
 
 
 
-function getCurrentData(supportContents, toggleSupportData, currentSupportNumber) {
-    let currentSupportData = toggleSupportData[currentSupportNumber];
+function getCurrentData(contents, toggleData, currentSupportNumber) {
+    let currentSupportData = toggleData[currentSupportNumber];
 
     const inputSelects = [];
     const labels = [];
 
-    const dataTargets = supportContents.querySelectorAll(".dataTarget");
+    const dataTargets = contents.querySelectorAll(".dataTarget");
     dataTargets.forEach((dataTarget) => {
         const tempInputSelects = dataTarget.querySelectorAll("input, select");
         const tempLabels = dataTarget.querySelectorAll("label");
@@ -250,17 +308,14 @@ function getCurrentData(supportContents, toggleSupportData, currentSupportNumber
         else {
             currentSupportData[i] = inputSelects[i].value;
         }
-
-        if(!toggleSupportDataLabelFilled) {
-            toggleSupportDataLabel.push(labels[i].innerHTML);
-        }
     }
 
     toggleSupportDataLabelFilled = true;
+    toggleSpanDataLabelFilled = true;
 }
 
-function setTargerData(supportContents, toggleSupportData, targetSupportNumber) {
-    let targetSupportData = toggleSupportData[targetSupportNumber];
+function setTargerData(contents, toggleData, targetSupportNumber) {
+    let targetSupportData = toggleData[targetSupportNumber];
 
     if(targetSupportData === undefined) {
         console.log("Data Empty.");
@@ -269,7 +324,7 @@ function setTargerData(supportContents, toggleSupportData, targetSupportNumber) 
 
     const inputSelects = [];
 
-    const dataTargets = supportContents.querySelectorAll(".dataTarget");
+    const dataTargets = contents.querySelectorAll(".dataTarget");
     dataTargets.forEach((dataTarget) => {
         const tempInputSelectList = dataTarget.querySelectorAll("input, select");
 
@@ -319,7 +374,9 @@ function setTargerData(supportContents, toggleSupportData, targetSupportNumber) 
                             let target = document.querySelector(calculateArray[j]);
                             
                             target.onblur = function() {
-                                calculateFunction(inputSelects[i], calculateArray);
+                                let result = calculateFunction(calculateArray);
+                                inputSelects[i].value = floatToMeter(result);
+                                targetSupportData[i][2] = floatToMeter(result);
                             };
 
                             oneForBlur = target;
@@ -339,8 +396,7 @@ function setTargerData(supportContents, toggleSupportData, targetSupportNumber) 
     }
 }
 
-function calculateFunction(dataTarget, calculateArray) {
-    console.log(33333);
+function calculateFunction(calculateArray) {
     let equation = "";
 
     for (let i = 0; i < calculateArray.length; i++) {
@@ -372,7 +428,7 @@ function calculateFunction(dataTarget, calculateArray) {
         }
     }
 
-    dataTarget.value = floatToMeter(eval(equation));
+    return eval(equation);
 }
 
 
@@ -480,7 +536,7 @@ let titlesStatus = {};
 titles.forEach((title) => {
     titlesStatus[title.querySelector(".title_text").innerHTML] = true;
 
-    title.addEventListener("click", (event) => {
+    title.addEventListener("click", () => {
         let target = title;
 
         if(titlesStatus[target.querySelector(".title_text").innerHTML]) {
@@ -508,13 +564,18 @@ titles.forEach((title) => {
 const createAssemblyUnit = document.querySelector("#footer-createAssemblyUnit");
 createAssemblyUnit.addEventListener("click", collectData);
 function collectData() {
-    console.log(toggleSpanDataLabel);
+    // console.log(toggleSupportDataLabel);
+    // console.log(toggleSupportData);
+    // console.log(toggleSpanDataLabel);
+    // console.log(toggleSpanData);
 
+    let currentSupportNumber = parseInt(supportToggles.querySelector("input:checked").dataset.value);
     let currentSpanNumber = parseInt(spanToggles.querySelector("input:checked").dataset.value);
-    toggleSpanData[currentSpanNumber] = getSpanData(spanContents);
-
-    let result = {};
+    numberOfSpansValue = numberOfSpans.value;
+    getCurrentData(supportContents, toggleSupportData[numberOfSpansValue], currentSupportNumber);
+    getCurrentData(spanContents, toggleSpanData, currentSpanNumber);
     
+    let result = {};
     for (let i = 0; i < toggleSpanData.length; i++) {
         for (let j = 0; j < toggleSpanData[i].length; j++) {
             if(toggleSpanData[i].length !== toggleSpanDataLabel.length) {
@@ -531,11 +592,26 @@ function collectData() {
             result[toggleSpanDataLabel[j]].push(toggleSpanData[i][j]);
         }
     }
+    for (let i = 0; i < toggleSupportData[numberOfSpansValue].length; i++) {
+        for (let j = 0; j < toggleSupportData[numberOfSpansValue][i].length; j++) {
+            if(toggleSupportData[numberOfSpansValue][i].length !== toggleSupportDataLabel.length) {
+                console.log("Data Number Error.");
+                break;
+            }
+
+            if(!result.hasOwnProperty(toggleSupportDataLabel[j])) {
+                result[toggleSupportDataLabel[j]] = [toggleSupportData[numberOfSpansValue][i][j]];
+
+                continue;
+            }
+
+            result[toggleSupportDataLabel[j]].push(toggleSupportData[numberOfSpansValue][i][j]);
+        }
+    }
 
     console.log(result);
-    console.log(toggleSpanData);
 
-    // window.chrome.webview.postMessage(JSON.stringify(result));
+    window.chrome.webview.postMessage(JSON.stringify(result));
 }
 
 function meterToFloat(strNumber) {
